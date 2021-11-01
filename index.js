@@ -12,7 +12,8 @@ app.get('/', (req, res)=>{
     res.send("Hello from other side");
 });
 app.use('/api/user', require('./routes/user'))
-app.use('/api/class', require('./routes/class') )
+app.use('/api/class', require('./routes/class'))
+app.use('/api/review', require('./routes/review'))
 
 
 app.listen(port, ()=>{
