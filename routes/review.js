@@ -9,10 +9,13 @@ router.get('/review', async (req, res)=>{
   res.json(review)
 });
 
-router.post('/postreview',fetchuser, (req, res)=>{
+router.post('/postreview',fetchuser, async (req, res)=>{
+  let user = await User.findById(req.user.id);
+  console.log(user);
   try {
     let reviews = new Review({
-      name: req.user.id,
+      firstname: user.firstName,
+      lastname: user.lastName,
       review: req.body.review
     })
     reviews.save();
@@ -22,15 +25,12 @@ router.post('/postreview',fetchuser, (req, res)=>{
   }
 });
 
-router.get('/reviewuser/:id', (req, res)=>{
-  try {
+router.get('/reviewuser/:id', async (req, res)=>{
     let id = req.params.id;
     console.log(id);
-    let user = User.findById('id');
+    let user = await User.findById(id).select("-password")
     res.json(user);
-  } catch (error) {
-    res.status(400).send("Internal Error")
-  }
+  
 })
 
 module.exports = router;
