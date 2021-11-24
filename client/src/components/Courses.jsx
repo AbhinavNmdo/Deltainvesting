@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cources = (props) => {
-  const host = "http://localhost:5000";
-  // const host = "https://deltabackendservice.herokuapp.com"
+  // const host = "http://localhost:5000";
+  const host = "https://deltainvesting.herokuapp.com"
   // const host = "https://deltainvesting.azurewebsites.net"
   const initialClasses = [];
   const [classes, setClasses] = useState(initialClasses);

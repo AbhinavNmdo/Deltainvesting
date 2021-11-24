@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 // import StarRatingComponent from 'react-star-rating-component';
 
 const Review = (props) => {
-    // const host = "https://deltabackendservice.herokuapp.com";
-    const host = "http://localhost:5000";
+    const host = "https://deltainvesting.herokuapp.com"
+    // const host = "http://localhost:5000";
 
     const [review, setReview] = useState([]);
     const [write, setWrite] = useState({review: ""})
