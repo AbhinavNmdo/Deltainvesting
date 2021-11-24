@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb+srv://abhinav:abhinav1234@bazaroffline.0hj24.mongodb.net/deltainvesting?retryWrites=true&w=majority";
 
 const mongoConnect = () => {
-    mongoose.connect(mongoURI, ()=>{
+    mongoose.connect(process.env.MONGO_URI, ()=>{
         console.log("Successfully Connected to MongoDB");
     });
+    console.log(process.env.MONGO_URI)
+    console.log(process.env.NODE_ENV)
+    console.log(process.env.PORT)
 };
 
 module.exports = mongoConnect;

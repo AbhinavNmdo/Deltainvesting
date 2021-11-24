@@ -1,0 +1,12 @@
+#header::before{
+  content: '';
+  background-image: url("https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3RvY2slMjBtYXJrZXR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80");
+  height: 30rem;
+  width: 100%;
+  top: 0%;
+  left: 0%;
+  position: absolute;
+  z-index: -1;
+  color: rgba(255, 255, 255, 0);
+  opacity: 0.9;
+}
