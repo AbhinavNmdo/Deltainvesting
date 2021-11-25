@@ -6,8 +6,8 @@ const Review = (props) => {
     const [review, setReview] = useState([]);
     const [write, setWrite] = useState({review: ""})
 
-    const host = "http://localhost:5000"
-    // const host = "https://deltainvesting.herokuapp.com"
+    // const host = "http://localhost:5000"
+    const host = "https://deltainvesting.herokuapp.com"
     const getReview = async () => {
         const responce = await fetch(`${host}/api/review/review`, {
             method: 'GET',
