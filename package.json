@@ -1,6 +1,6 @@
 {
-  "name": "deltainvesting-backend",
-  "version": "1.0.0",
+  "name": "deltainvesting",
+  "version": "2.3.0",
   "description": "this is the backend of the deltainvesting website",
   "main": "index.js",
   "scripts": {

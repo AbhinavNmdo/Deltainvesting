@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cources from "./components/Courses";
-import Calculator from "./components/Calculator";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Class from "./components/Class";
@@ -12,6 +11,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import Review from "./components/Review";
 import LoadingBar from 'react-top-loading-bar'
 import { useState } from "react";
+import BlackSchole from "./components/BlackSchole.jsx";
+import NiftyRange from "./components/NiftyRange.jsx";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [progress, setProgress] = useState(0)
@@ -24,7 +27,7 @@ function App() {
       />
       <Router>
         <ScrollToTop />
-        <Navbar setProgress={setProgress} />
+        <Navbar setProgress={setProgress} toast={toast} />
         <Switch>
           <Route exact path="/">
             <HomePage setProgress={setProgress} />
@@ -33,24 +36,41 @@ function App() {
             <About setProgress={setProgress} />
           </Route>
           <Route exact path="/courses">
-            <Cources setProgress={setProgress} />
-          </Route>
-          <Route exact path="/calculators">
-            <Calculator setProgress={setProgress} />
+            <Cources setProgress={setProgress} toast={toast} />
           </Route>
           <Route exact path="/login">
-            <Login setProgress={setProgress} />
+            <Login setProgress={setProgress} toast={toast}/>
           </Route>
           <Route exact path="/signup">
-            <Signup setProgress={setProgress} />
+            <Signup setProgress={setProgress} toast={toast} />
           </Route>
-          <Route exact path="/class/:id">
+          <Route exact path="/courses/class/:id">
             <Class setProgress={setProgress} />
           </Route>
           <Route exact path="/reviews">
-            <Review setProgress={setProgress} />
+            <Review setProgress={setProgress} toast={toast} />
+          </Route>
+          <Route exact path="/calculators/blackschole">
+            <BlackSchole />
+          </Route>
+          <Route exact path="/calculators/niftyrange">
+            <NiftyRange />
           </Route>
         </Switch>
+        <ToastContainer
+                style={{ zIndex: '10000', margin: '10px' }}
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                limit="3"
+            />
         <Footer />
       </Router>
     </>

@@ -1,6 +1,7 @@
 #header::before{
   content: '';
-  background-image: url("https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3RvY2slMjBtYXJrZXR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80");
+  /* background-image: url("https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3RvY2slMjBtYXJrZXR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"); */
+  background: url('Images/stock5.jpg') no-repeat center center/cover;
   height: 30rem;
   width: 100%;
   top: 0%;

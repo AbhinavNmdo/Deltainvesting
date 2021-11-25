@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 // import StarRatingComponent from 'react-star-rating-component';
 
 const Review = (props) => {
-    const host = "https://deltainvesting.herokuapp.com"
-    // const host = "http://localhost:5000";
 
     const [review, setReview] = useState([]);
     const [write, setWrite] = useState({review: ""})
 
+    const host = "http://localhost:5000"
+    // const host = "https://deltainvesting.herokuapp.com"
     const getReview = async () => {
         const responce = await fetch(`${host}/api/review/review`, {
             method: 'GET',
@@ -23,6 +23,7 @@ const Review = (props) => {
     const handleOnChange = (e)=>{
         setWrite({...write, [e.target.name]: [e.target.value]})
     }
+
 
     const addReview = async (rev)=>{
         const responce = await fetch(`${host}/api/review/postreview`, {
@@ -40,6 +41,9 @@ const Review = (props) => {
             lastname: json.lastname
         }
         setReview(review.concat(reviews));
+        setTimeout(() => {
+            props.toast.success("Review Added")
+        }, 300);
     }
 
     const handleOnClick = async (e)=>{

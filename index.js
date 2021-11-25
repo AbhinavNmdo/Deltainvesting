@@ -23,11 +23,6 @@ if(process.env.NODE_ENV == "production"){
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
     })
 }
-else{
-    app.get('/', (req, res)=>{
-        res.send("api running")
-    })
-}
 app.listen(port, ()=>{
     console.log(`Listning at http://localhost:${port}`)
 })

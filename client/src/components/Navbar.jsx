@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-// import { HashLink } from 'react-router-hash-link';
 
 const Navbar = (props) => {
   const history = useHistory();
@@ -31,17 +30,22 @@ const Navbar = (props) => {
     }
   };
   window.addEventListener("scroll", handleOnScroll);
-
-  const handleLogout = ()=>{
-    localStorage.removeItem('auth-token')
-    history.push('/login');
-  }
-
+  
   const toggle = ()=>{
     if(expand){
       ref.current.click();
       setExpand(false);
     }
+  }
+
+  const handleLogout = (e)=>{
+  e.preventDefault();
+    toggle();
+    localStorage.clear();
+    history.push('/login');
+    setTimeout(() => {
+      props.toast.warning("Logout Success")
+    }, 300);
   }
 
   return (
@@ -52,13 +56,11 @@ const Navbar = (props) => {
           className={`navbar navbar-expand-lg navbar-dark ${
             location.pathname !== "/" ? "bg-dark" : ""
           } ${nav} ${burger}`}
-          style={{
-            backgroundColor:
-              location.pathname === "/" ? "rgba(255, 255, 255, 0)" : "#212529",
-            transition: "all",
-            transitionDuration: "0.3s",
-            zIndex: '10000'
-          }}
+          style={{backgroundColor:
+            location.pathname === "/" ? "rgba(255, 255, 255, 0)" : "#212529",
+          transition: "all",
+          transitionDuration: location.pathname === '/'? "0.5s": 'unset',
+          zIndex: '100'}}
         >
           <div className="container-fluid">
             <Link key="home" className="navbar-brand" to="/">
@@ -151,25 +153,22 @@ const Navbar = (props) => {
                       <Link
                         key="cources"
                         className="dropdown-item"
-                        to="/cources"
+                        to="/calculators/blackschole"
                         onClick={toggle}
                       >
                         Black Scholes
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/cources" onClick={toggle}>
-                        Nifty Calculator
+                      <Link className="dropdown-item" to="/calculators/niftyrange" onClick={toggle}>
+                        Nifty Range Calculator
                       </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
                     </li>
                   </ul>
                 </li>
               </ul>
               {localStorage.getItem("auth-token") ? (
-                <button className="btn btn-danger" onClick={handleLogout} onClick={toggle}>Logout</button>
+                <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
               ) : (
                 <form className="d-flex">
                   <Link to="/login" className="btn btn-info mx-1" onClick={toggle}>

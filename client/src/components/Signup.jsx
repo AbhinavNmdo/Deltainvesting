@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 
 const Signup = (props) => {
-  // const host = "http://localhost:5000";
-  const host = "https://deltainvesting.herokuapp.com"
-  // const host = "https://deltainvesting.azurewebsites.net"
   const history = useHistory();
   const [credentials, setCredentials] = useState({
     firstName: "",
@@ -22,6 +19,8 @@ const Signup = (props) => {
     setCredentials({...credentials, [e.target.name]: e.target.value});
   };
 
+  const host = "http://localhost:5000"
+    // const host = "https://deltainvesting.herokuapp.com"
   const handleOnSubmit = async (e)=>{
     e.preventDefault();
     const responce = await fetch(`${host}/api/user/signup`, {
@@ -43,12 +42,18 @@ const Signup = (props) => {
     const json = await responce.json();
     if(json.success){
       history.push('/login')
+      setTimeout(() => {
+        props.toast.success("Registered")
+      }, 300);
+    }
+    else{
+      props.toast.error("Something Wrong")
     }
   }
 
   return (
     <>
-      <div className="container my-4 p-3">
+      <div className="container card p-3 w-50" style={{ borderRadius: '13px', boxShadow: '1px 1px 20px', marginTop: '40px', marginBottom: '50px' }}>
         <h1 align="center" style={{ marginBottom: "60px" }}>
           Register Yourself
         </h1>
@@ -146,13 +151,15 @@ const Signup = (props) => {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block mb-4">
-            SignUp
-          </button>
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary my-4 btn-block mb-4">
+              Sign in
+            </button>
+          </div>
         </form>
-        <div className="text-center">
+        <div className="text-center mt-3">
           <p>
-            Already a member? <Link to="/login">Login</Link>
+            Already a member? <Link href="/login">Login</Link>
           </p>
         </div>
       </div>
