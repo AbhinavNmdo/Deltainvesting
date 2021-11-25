@@ -9,7 +9,7 @@ const Review = (props) => {
     // const host = "http://localhost:5000"
     const host = "https://deltainvesting.herokuapp.com"
     const getReview = async () => {
-        const responce = await fetch(`${host}/api/review/review`, {
+        const responce = await fetch(`${host}/api/review/`, {
             method: 'GET',
             headers: {
                 "Content-type": "application/json"
@@ -26,7 +26,7 @@ const Review = (props) => {
 
 
     const addReview = async (rev)=>{
-        const responce = await fetch(`${host}/api/review/postreview`, {
+        const responce = await fetch(`${host}/api/review/`, {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",

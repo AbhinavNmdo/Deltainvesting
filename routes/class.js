@@ -1,31 +1,45 @@
-const express = require('express');
-const Class = require('../models/Class');
-const fetchuser = require('../middleware/fetchuser');
+const express = require("express");
+const Class = require("../models/Class");
+const fetchuser = require("../middleware/fetchuser");
 const router = express.Router();
 
-router.get('/allclass', async (req,res)=>{
+router.get("/", async (req, res) => {
+  try {
     let classes = await Class.find();
-    res.json(classes);
+    res.status(200).json({ success: true, classes });
+  } catch (error) {
+    res.status(500).json({ success: false, error: "internal error" });
+  }
 });
 
-router.get('/singleclass/:id', async (req,res)=>{
-    const id = req.params.id;
-    const allclass = await Class.findById(id);
-    res.json(allclass)
-})
+router.get("/class/:id", async (req, res) => {
+  try {
+    const classes = await Class.findById(req.params.id);
+    res.status(200).json({ success: true, classes });
+  } catch (error) {}
+});
 
-router.post('/addclass', (req, res)=>{
-    const {name, description, classLink, thumbnail} = req.body;
+router.post("/", (req, res) => {
+  try {
+    const { name, description, classLink, thumbnail } = req.body;
+    let classes = Class.create({
+      name,
+      description,
+      classLink,
+      thumbnail,
+    });
+    res.status(201).json({success: true, classes});
+  } catch (error) {
+    res.status(500).json({success: false, error: "internal error" });
+  }
+});
+
+router.delete('/class/:id', async (req, res)=>{
     try {
-        Class.create({
-            name,
-            description,
-            classLink,
-            thumbnail
-        });
-        res.send("Done")
+        let classes = await Class.findByIdAndDelete(req.params.id);
+        res.status(200).json({success: true, classes});
     } catch (error) {
-        res.status(500).json({error});
+        res.status(500).json({success: false, error: "internal error"})
     }
 })
 

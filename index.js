@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 app.use('/api/user', require('./routes/user'))
-app.use('/api/class', require('./routes/class'))
+app.use('/api/courses', require('./routes/class'))
 app.use('/api/review', require('./routes/review'))
 
 if(process.env.NODE_ENV == "production"){

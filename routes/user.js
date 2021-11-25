@@ -6,9 +6,8 @@ const jwt = require("jsonwebtoken");
 const fetchuser = require("../middleware/fetchuser");
 
 const JWT_SECRET = "this$is$the$sec$string";
-let success = false;
 
-router.post("/signup", async (req, res) => {
+router.post("/auth/signup", async (req, res) => {
   const {
     firstName,
     lastName,
@@ -22,27 +21,22 @@ router.post("/signup", async (req, res) => {
   try {
     let user = await User.findOne({ email });
     if (user) {
-      res.status(400).json({ success, errror: "This email is already exist" });
-    } 
-    else {
+      res.status(401).json({ success: false, error: "email already exist" });
+    } else {
       if (cpassword !== password) {
-        res.status(400).json({
-            success,
-            error: "Password and Confirm password doesnt match",
-          });
+        res.status(400).json({success: false, error: "password doesnt match"});
       } else {
         const salt = await bcrypt.genSalt(10);
         const secPass = await bcrypt.hash(password, salt);
         user = User.create({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          companyName: req.body.companyName,
-          address: req.body.address,
-          email: req.body.email,
-          phone: req.body.phone,
-          password: secPass,
+          firstName,
+          lastName,
+          companyName,
+          address,
+          email,
+          phone,
+          password: secPass
         });
-
 
         const data_signup = {
           user: {
@@ -51,23 +45,23 @@ router.post("/signup", async (req, res) => {
         };
 
         const authtoken_signup = jwt.sign(data_signup, JWT_SECRET);
-        res.json({ success: true, authtoken_signup });
+        res.status(201).json({ success: true, authtoken_signup });
       }
     }
   } catch (error) {
-    res.status(500).json({ success, error });
+    res.status(500).json({ success: false, error: "internal error" });
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/auth/login", async (req, res) => {
   const { email, password } = req.body;
   let user = await User.findOne({ email });
   if (!user) {
-    res.status(400).json({ success, error: "Email not exist" });
+    res.status(401).json({ success: false, error: "invalid email" });
   } else {
     let pass = await bcrypt.compare(password, user.password);
     if (!pass) {
-      res.status(400).json({ success, error: "Password Incorrect" });
+      res.status(401).json({ success: false, error: "invalid password" });
     } else {
       let data_login = {
         user: {
@@ -75,7 +69,7 @@ router.post("/login", async (req, res) => {
         },
       };
       const authtoken_login = jwt.sign(data_login, JWT_SECRET);
-      res.json({ success: true, authtoken_login });
+      res.status(202).json({ success: true, authtoken_login });
     }
   }
 });
@@ -84,10 +78,28 @@ router.get("/getuser", fetchuser, async (req, res) => {
   try {
     let userid = req.user.id;
     let user = await User.findById(userid).select("-password");
-    res.send(user);
+    res.status(200).json({success: true, user});
   } catch (error) {
-    res.status(500).json({ success, error: "Internal Server Error" });
+    res.status(500).json({ success, error: "internal error" });
   }
 });
+
+router.get('/', async(req, res)=>{
+  try {
+    let user = await User.find().select("-password");
+    res.status(200).json({success: true, user});
+  } catch (error) {
+    res.status(500).json({success: false, error: "internal error"});
+  }
+});
+
+router.delete('/:id', async (req, res)=>{
+  try {
+    let user = await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({success: true, user});
+  } catch (error) {
+    res.status(500).json({success: false, error: "internal error"})
+  }
+})
 
 module.exports = router;

@@ -8,7 +8,7 @@ const Cources = (props) => {
   // const host = "http://localhost:5000"
     const host = "https://deltainvesting.herokuapp.com"
   const getClass = async ()=>{
-    const responce = await fetch(`${host}/api/class/allclass`, {
+    const responce = await fetch(`${host}/api/class/`, {
       method: 'GET',
       headers: {
         "Content-type": "application/json"

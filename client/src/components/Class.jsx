@@ -10,7 +10,7 @@ const Class = () => {
     const host = "https://deltainvesting.herokuapp.com"
     
     const fetchClass = async ()=>{
-        const responce = await fetch(`${host}/api/class/singleclass/${id}`, {
+        const responce = await fetch(`${host}/api/courses/class/${id}`, {
             method: 'GET',
             headers: {
                 "Content-type": "application/json"

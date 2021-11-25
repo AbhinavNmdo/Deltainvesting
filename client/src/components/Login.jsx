@@ -16,7 +16,7 @@ const Login = (props) => {
     const host = "https://deltainvesting.herokuapp.com"
   const handleOnSubmit = async (e)=>{
     e.preventDefault();
-    const responce = await fetch(`${host}/api/user/login`, {
+    const responce = await fetch(`${host}/api/user/auth/login`, {
       method: 'POST',
       headers: {
         "Content-type": "application/json"
