@@ -5,17 +5,17 @@ const Cources = (props) => {
   const initialClasses = [];
   const [classes, setClasses] = useState(initialClasses);
 
-  // const host = "http://localhost:5000"
-    const host = "https://deltainvesting.herokuapp.com"
+  const host = "http://localhost:5000"
+    // const host = "https://deltainvesting.herokuapp.com"
   const getClass = async ()=>{
-    const responce = await fetch(`${host}/api/class/`, {
+    const responce = await fetch(`${host}/api/courses`, {
       method: 'GET',
       headers: {
         "Content-type": "application/json"
       }
     });
     const json = await responce.json();
-    setClasses(json);
+    setClasses(json.classes);
   }
 
   const toasting = ()=>{
@@ -45,24 +45,24 @@ const Cources = (props) => {
                       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem iusto autem quod unde consectetur vel neque fuga eligendi itaque sed.
                     </p>
                     <p className="card-text">
-                      {classs.category == 'primium' ? <span className="badge bg-warning text-dark">Primium</span> : <small className="text-muted">Normal</small>}
+                      {classs.category === 'primium' ? <span className="badge bg-warning text-dark">Primium</span> : <small className="text-muted">Normal</small>}
                     </p>
                     {(() => {
-                      if (classs.category == 'primium') {
+                      if (classs.category === 'primium') {
                         if (localStorage.getItem('auth-token')) {
                           return (
-                            <Link to={`/courses/class/${classs._id}`}><a className="stretched-link"></a></Link>
+                            <Link to={`/courses/class/${classs._id}`} className="stretched-link"></Link>
                           )
                         }
                         else {
                           return (
-                            <Link to="#"><a onClick={toasting} className="stretched-link"></a></Link>
+                            <Link to="#" className="stretched-link" onClick={toasting}></Link>
                           )
                         }
                       }
                       else {
                         return (
-                          <Link to={`/courses/class/${classs._id}`}><a className="stretched-link"></a></Link>
+                          <Link to={`/courses/class/${classs._id}`} className="stretched-link"></Link>
                         )
                       }
                     })()}

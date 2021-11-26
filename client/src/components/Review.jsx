@@ -6,17 +6,17 @@ const Review = (props) => {
     const [review, setReview] = useState([]);
     const [write, setWrite] = useState({review: ""})
 
-    // const host = "http://localhost:5000"
-    const host = "https://deltainvesting.herokuapp.com"
+    const host = "http://localhost:5000"
+    // const host = "https://deltainvesting.herokuapp.com"
     const getReview = async () => {
-        const responce = await fetch(`${host}/api/review/`, {
+        const responce = await fetch(`${host}/api/review`, {
             method: 'GET',
             headers: {
                 "Content-type": "application/json"
             }
         });
         const json = await responce.json();
-        setReview(json);
+        setReview(json.review);
         console.log(json);
     };
 
@@ -26,7 +26,7 @@ const Review = (props) => {
 
 
     const addReview = async (rev)=>{
-        const responce = await fetch(`${host}/api/review/`, {
+        const responce = await fetch(`${host}/api/review`, {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",

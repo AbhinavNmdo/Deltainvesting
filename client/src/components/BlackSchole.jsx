@@ -21,13 +21,13 @@ const BlackSchole = () => {
     const BScal = (e) => {
         e.preventDefault();
         const days = parseFloat(value.t / 365).toFixed(4)
-        const r1 = eval(parseFloat(value.EX) * (Math.exp((-parseFloat(value.rf) / 100) * parseFloat(days)))).toFixed(4);
+        const r1 = (parseFloat(value.EX) * (Math.exp((-parseFloat(value.rf) / 100) * parseFloat(days)))).toFixed(4);
 
-        const r2 = eval((parseFloat(value.a) / 100) * Math.pow(days, 0.5)).toFixed(4);
+        const r2 = ((parseFloat(value.a) / 100) * Math.pow(days, 0.5)).toFixed(4);
 
-        const r3 = eval(((Math.log(parseFloat(value.P) / parseFloat(value.EX))) + ((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5)))).toFixed(4);
+        const r3 = (((Math.log(parseFloat(value.P) / parseFloat(value.EX))) + ((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5)))).toFixed(4);
 
-        const r4 = eval(parseFloat(r3) - parseFloat(r2)).toFixed(4);
+        const r4 = (parseFloat(r3) - parseFloat(r2)).toFixed(4);
 
         var distribution1 = gaussian(0, 1);
         var distribution2 = gaussian(0, 1);
