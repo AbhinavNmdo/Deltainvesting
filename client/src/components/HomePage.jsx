@@ -29,7 +29,7 @@ const HomePage = (props) => {
                 margin: "7px",
               }}
             >
-              <div className="card-body">
+              <div className="card-body" style={{minHeight: '26ch'}}>
                 <h4 className="card-title my-3" align="center">
                   Our Courses
                 </h4>
@@ -59,7 +59,7 @@ const HomePage = (props) => {
                 margin: "7px",
               }}
             >
-              <div className="card-body">
+              <div className="card-body" style={{minHeight: '26ch'}}>
                 <h4 className="card-title my-3" align="center">
                   What is Stock Market?
                 </h4>
@@ -69,7 +69,7 @@ const HomePage = (props) => {
               </div>
               <iframe
                 width="auto"
-                height="295"
+                height="250"
                 src="https://www.youtube.com/embed/RslxPbz8_eM"
                 title="YouTube video player"
                 frameBorder="0"
