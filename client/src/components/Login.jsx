@@ -4,17 +4,17 @@ import { Link, useHistory } from "react-router-dom";
 const Login = (props) => {
   const history = useHistory();
   const [credentials, setCredentials] = useState({
-    email: "", 
+    email: "",
     password: ""
   });
 
-  const handleOnChange = (e)=>{
-    setCredentials({...credentials, [e.target.name]: e.target.value});
+  const handleOnChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   // const host = "http://localhost:5000"
-    const host = "https://deltainvesting.herokuapp.com"
-  const handleOnSubmit = async (e)=>{
+  const host = "https://deltainvesting.herokuapp.com"
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     const responce = await fetch(`${host}/api/user/auth/login`, {
       method: 'POST',
@@ -27,21 +27,22 @@ const Login = (props) => {
       })
     });
     const json = await responce.json();
-    if(json.success){
+    if (json.success) {
       localStorage.setItem('auth-token', json.authtoken_login);
       history.push('/')
       setTimeout(() => {
         props.toast.success("Login Successfully")
       }, 300);
     }
-    else{
+    else {
       props.toast.error("Invalid Username or Password")
     }
   }
 
   return (
-    <div className="container p-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '90vh' }}>
-        <div className="card d-flex flex-column justify-content-center align-items-center" style={{borderRadius: '13px', boxShadow: '1px 1px 20px'}}>
+    <div style={{background: 'url(https://static.vecteezy.com/system/resources/previews/002/062/658/non_2x/business-candle-stick-graph-chart-of-stock-market-investment-trading-on-white-background-design-bullish-point-trend-of-graph-illustration-vector.jpg) center'}}>
+      <div className="container p-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '90vh' }}>
+        <div className="card d-flex flex-column justify-content-center align-items-center" style={{ borderRadius: '13px', boxShadow: '1px 1px 20px' }}>
           <h1 className="my-4">Login</h1>
           <form onSubmit={handleOnSubmit} style={{ width: '300px', padding: '10px' }}>
             <div className="form-outline mb-4">
@@ -73,6 +74,7 @@ const Login = (props) => {
           </form>
         </div>
       </div>
+    </div>
   );
 };
 
