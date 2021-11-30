@@ -153,15 +153,20 @@ const Navbar = (props) => {
                       <Link
                         key="cources"
                         className="dropdown-item"
-                        to="/calculators/blackschole"
+                        to="/calculators/optionprice"
                         onClick={toggle}
                       >
-                        Black Scholes
+                        Option Price Calculator
                       </Link>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/calculators/niftyrange" onClick={toggle}>
                         Nifty Range Calculator
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/calculators/ES6" onClick={toggle}>
+                        ES6 Calculator
                       </Link>
                     </li>
                   </ul>

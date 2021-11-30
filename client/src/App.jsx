@@ -11,10 +11,11 @@ import ScrollToTop from "./components/ScrollToTop";
 import Review from "./components/Review";
 import LoadingBar from 'react-top-loading-bar'
 import { useState } from "react";
-import BlackSchole from "./components/BlackSchole.jsx";
+import OptionPrice from "./components/OptionPrice";
 import NiftyRange from "./components/NiftyRange.jsx";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ES from "./components/ES.jsx";
 
 function App() {
   const [progress, setProgress] = useState(0)
@@ -50,11 +51,14 @@ function App() {
           <Route exact path="/reviews">
             <Review setProgress={setProgress} toast={toast} />
           </Route>
-          <Route exact path="/calculators/blackschole">
-            <BlackSchole />
+          <Route exact path="/calculators/optionprice">
+            <OptionPrice />
           </Route>
           <Route exact path="/calculators/niftyrange">
             <NiftyRange />
+          </Route>
+          <Route exact path="/calculators/ES6">
+            <ES/>
           </Route>
         </Switch>
         <ToastContainer

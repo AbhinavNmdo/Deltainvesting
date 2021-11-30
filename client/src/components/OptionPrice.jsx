@@ -58,10 +58,10 @@ const BlackSchole = () => {
     }
     return (
         <>
-            {/* Black-Scholes Calculator */}
+            {/* Option Price Calculator */}
             <div className="container my-4">
                 <div className="card p-4">
-                    <h1 align="center" className="form-text fs-1">Black-Scholes Calculator</h1>
+                    <h1 align="center" className="form-text fs-1">Option Price Calculator</h1>
                     <div className="row my-4">
                         <div className="col-md-6">
                             <div className="card p-3">
