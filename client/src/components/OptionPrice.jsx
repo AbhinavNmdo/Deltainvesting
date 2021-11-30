@@ -3,16 +3,7 @@ import React, { useState } from 'react'
 const BlackSchole = () => {
     const gaussian = require('gaussian')
     const [value, setValue] = useState(0);
-
-    // const [result1, setResult1] = useState(0);
-    // const [result2, setResult2] = useState(0);
-    // const [result3, setResult3] = useState(0);
-    // const [result4, setResult4] = useState(0);
-    const [result5, setResult5] = useState(0);
-    // const [result6, setResult6] = useState(0);
-    const [result7, setResult7] = useState(0);
-    const [result8, setResult8] = useState(0);
-    const [result9, setResult9] = useState(0);
+    const [solu, setSolu] = useState({call: 0, put: 0, dcall: 0, dput: 0})
 
     const handleChange = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -20,41 +11,36 @@ const BlackSchole = () => {
 
     const BScal = (e) => {
         e.preventDefault();
-        const days = parseFloat(value.t / 365).toFixed(4)
-        const r1 = (parseFloat(value.EX) * (Math.exp((-parseFloat(value.rf) / 100) * parseFloat(days)))).toFixed(4);
+        const days = parseFloat(value.t / 365)
+        const r1 = (parseFloat(value.EX) * (Math.exp((-parseFloat(value.rf) / 100) * parseFloat(days))));
 
-        const r2 = ((parseFloat(value.a) / 100) * Math.pow(days, 0.5)).toFixed(4);
+        const r2 = ((parseFloat(value.a) / 100) * Math.pow(days, 0.5));
 
-        const r3 = (((Math.log(parseFloat(value.P) / parseFloat(value.EX))) + ((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5)))).toFixed(4);
+        const r3 = (((Math.log(parseFloat(value.P) / parseFloat(value.EX))) + ((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5))));
 
-        const r4 = (parseFloat(r3) - parseFloat(r2)).toFixed(4);
+        const r4 = (parseFloat(r3) - parseFloat(r2));
 
         var distribution1 = gaussian(0, 1);
         var distribution2 = gaussian(0, 1);
-        const r5 = distribution1.cdf(r3).toFixed(4)
+        const r5 = distribution1.cdf(r3)
 
         const delta_put = parseFloat(r5) - 1
 
-        const r6 = distribution2.cdf(r4).toFixed(4)
+        const r6 = distribution2.cdf(r4)
 
-        const call = parseFloat(value.P) * parseFloat(r5).toFixed(4) - ((parseFloat(value.EX) * parseFloat(r6)) / Math.exp(parseFloat(value.rf / 100) * parseFloat(days))).toFixed(2)
+        const call = parseFloat(value.P) * parseFloat(r5) - ((parseFloat(value.EX) * parseFloat(r6)) / Math.exp(parseFloat(value.rf / 100) * parseFloat(days)))
 
         const put = (parseFloat(call) + parseFloat(r1)) - parseFloat(value.P)
 
-        // const first = eval(Math.log(parseFloat(value.P) / parseFloat(value.EX)))
-        // const second = eval((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2) )
-        // const third = eval(second * parseFloat(days))
-        // const forth = eval(first + third)
-        // const five = eval((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5)))
-        // setResult1(r1);
-        // setResult2(r2);
-        // setResult3(r3);
-        // setResult4(r4);
-        setResult5(r5);
-        // setResult6(r6);
-        setResult7(call);
-        setResult8(put);
-        setResult9(delta_put)
+        const callr = Math.round((call + Number.EPSILON) * 100) / 100
+        const putr = Math.round((put + Number.EPSILON) * 100) / 100
+        const dcallr = Math.round((r5 + Number.EPSILON) * 100) / 100
+        const dputr = Math.round((delta_put + Number.EPSILON) * 100) / 100
+
+        setSolu(solu=>({...solu, dcall: dcallr}))
+        setSolu(solu=>({...solu, dput: dputr}))
+        setSolu(solu=>({...solu, call: callr}))
+        setSolu(solu=>({...solu, put: putr}))
     }
     return (
         <>
@@ -113,14 +99,6 @@ const BlackSchole = () => {
 
                                     <button className="btn btn-primary mt-5" onClick={BScal}>Submit</button>
                                 </form>
-                                {/* <h1 className="form-text fs-2" name="EXv">Present Value of Exercise Price (PV(EX)) = {result1}</h1>
-                                <h1 className="form-text fs-2">s*t^.5 = {result2}</h1>
-                                <h1 className="form-text fs-2">d1 = {result3}</h1>
-                                <h1 className="form-text fs-2">d2 = {result4}</h1>
-                                <h1 className="form-text fs-2">Delta N(d1) Normal Cumulative Density Function = {result5}</h1>
-                                <h1 className="form-text fs-2">Bank Loan  N(d2)*PV(EX) = {result6}</h1>
-                                <h1 className="form-text fs-2">Value of Call = {result7}</h1>
-                                <h1 className="form-text fs-2">Value of Put = {result8}</h1> */}
                             </div>
                         </div>
 
@@ -137,13 +115,13 @@ const BlackSchole = () => {
                                     <tbody>
                                         <tr>
                                             <th scope="row">Price</th>
-                                            <td>{result7}</td>
-                                            <td>{result8}</td>
+                                            <td>{solu.call}</td>
+                                            <td>{solu.put}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Delta</th>
-                                            <td>{result5}</td>
-                                            <td>{result9}</td>
+                                            <td>{solu.dcall}</td>
+                                            <td>{solu.dput}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Gamma</th>

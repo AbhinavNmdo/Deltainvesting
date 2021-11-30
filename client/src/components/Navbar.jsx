@@ -165,8 +165,8 @@ const Navbar = (props) => {
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/calculators/ES6" onClick={toggle}>
-                        ES6 Calculator
+                      <Link className="dropdown-item" to="/calculators/camarilla" onClick={toggle}>
+                        Camarilla Calculator
                       </Link>
                     </li>
                   </ul>

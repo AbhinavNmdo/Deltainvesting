@@ -15,7 +15,7 @@ import OptionPrice from "./components/OptionPrice";
 import NiftyRange from "./components/NiftyRange.jsx";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ES from "./components/ES.jsx";
+import Camarilla from "./components/Camarilla.jsx";
 
 function App() {
   const [progress, setProgress] = useState(0)
@@ -57,8 +57,8 @@ function App() {
           <Route exact path="/calculators/niftyrange">
             <NiftyRange />
           </Route>
-          <Route exact path="/calculators/ES6">
-            <ES/>
+          <Route exact path="/calculators/camarilla">
+            <Camarilla />
           </Route>
         </Switch>
         <ToastContainer

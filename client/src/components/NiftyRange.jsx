@@ -2,13 +2,7 @@ import React, { useState } from 'react'
 
 const NiftyRange = () => {
     const [value, setValue] = useState(0);
-
-    const [dailyu, setDailyu] = useState(0)
-    const [dailyd, setDailyd] = useState(0)
-    const [weeklyu, setWeeklyu] = useState(0)
-    const [weeklyd, setWeeklyd] = useState(0)
-    const [monthlyu, setMonthlyu] = useState(0)
-    const [monthlyd, setMonthlyd] = useState(0)
+    const [solu, setSolu] = useState({du: 0, dd: 0, wu: 0, wd: 0, mu: 0, md: 0})
 
     const handleChange = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -24,12 +18,26 @@ const NiftyRange = () => {
         const weeklyVolat = parseFloat(value.ivv) / parseFloat(weeklyFactor);
         const monthlyVolat = parseFloat(value.ivv) / parseFloat(monthlyFactor);
 
-        setDailyu(parseFloat(value.nmp) * parseFloat(1 + (parseFloat(dailyVolat) / 100)).toFixed(2))
-        setDailyd(parseFloat(value.nmp) * parseFloat(1 - (parseFloat(dailyVolat) / 100)).toFixed(2))
-        setWeeklyu(parseFloat(value.nmp) * parseFloat(1 + (parseFloat(weeklyVolat) / 100)).toFixed(2))
-        setWeeklyd(parseFloat(value.nmp) * parseFloat(1 - (parseFloat(weeklyVolat) / 100)).toFixed(2))
-        setMonthlyu(parseFloat(value.nmp) * parseFloat(1 + (parseFloat(monthlyVolat) / 100)).toFixed(2))
-        setMonthlyd(parseFloat(value.nmp) * parseFloat(1 - (parseFloat(monthlyVolat) / 100)).toFixed(2))
+        const dur = parseFloat(value.nmp) * parseFloat(1 + (parseFloat(dailyVolat) / 100));
+        const ddr = parseFloat(value.nmp) * parseFloat(1 - (parseFloat(dailyVolat) / 100));
+        const wur = parseFloat(value.nmp) * parseFloat(1 + (parseFloat(weeklyVolat) / 100));
+        const wdr = parseFloat(value.nmp) * parseFloat(1 - (parseFloat(weeklyVolat) / 100));
+        const mur = parseFloat(value.nmp) * parseFloat(1 + (parseFloat(monthlyVolat) / 100));
+        const mdr = parseFloat(value.nmp) * parseFloat(1 - (parseFloat(monthlyVolat) / 100));
+
+        const du = Math.round((dur + Number.EPSILON) * 100) / 100
+        const dd = Math.round((ddr + Number.EPSILON) * 100) / 100
+        const wu = Math.round((wur + Number.EPSILON) * 100) / 100
+        const wd = Math.round((wdr + Number.EPSILON) * 100) / 100
+        const mu = Math.round((mur + Number.EPSILON) * 100) / 100
+        const md = Math.round((mdr + Number.EPSILON) * 100) / 100
+
+        setSolu(solu=>({...solu, du}))
+        setSolu(solu=>({...solu, dd}))
+        setSolu(solu=>({...solu, wu}))
+        setSolu(solu=>({...solu, wd}))
+        setSolu(solu=>({...solu, mu}))
+        setSolu(solu=>({...solu, md}))
     }
 
     return (
@@ -78,18 +86,18 @@ const NiftyRange = () => {
                                     <tbody>
                                         <tr>
                                             <th scope="row">Daily</th>
-                                            <td style={{ color: 'green' }}>{dailyu}</td>
-                                            <td style={{ color: 'red' }}>{dailyd}</td>
+                                            <td style={{ color: 'green' }}>{solu.du}</td>
+                                            <td style={{ color: 'red' }}>{solu.dd}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Weekly</th>
-                                            <td style={{ color: 'green' }}>{weeklyu}</td>
-                                            <td style={{ color: 'red' }}>{weeklyd}</td>
+                                            <td style={{ color: 'green' }}>{solu.wu}</td>
+                                            <td style={{ color: 'red' }}>{solu.wd}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Monthly</th>
-                                            <td style={{ color: 'green' }}>{monthlyu}</td>
-                                            <td style={{ color: 'red' }}>{monthlyd}</td>
+                                            <td style={{ color: 'green' }}>{solu.mu}</td>
+                                            <td style={{ color: 'red' }}>{solu.md}</td>
                                         </tr>
                                     </tbody>
                                 </table>
