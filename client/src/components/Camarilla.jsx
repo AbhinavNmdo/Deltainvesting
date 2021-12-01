@@ -113,7 +113,7 @@ const Camarilla = () => {
                                     <tr>
                                         <th scope="row">R4</th>
                                         <td style={{color: 'blue'}}>{value.r4}</td>
-                                        <td>Long Breakdown</td>
+                                        <td>Long Breakout</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">R3</th>
@@ -148,7 +148,7 @@ const Camarilla = () => {
                                     <tr>
                                         <th scope="row">S3</th>
                                         <td style={{color: 'orange'}}>{value.s3}</td>
-                                        <td>Go Short</td>
+                                        <td>Go Long</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">S4</th>
