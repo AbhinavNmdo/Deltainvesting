@@ -11,14 +11,14 @@ import ScrollToTop from "./components/ScrollToTop";
 import Review from "./components/Review";
 import LoadingBar from 'react-top-loading-bar'
 import { useState } from "react";
-import OptionPrice from "./components/OptionPrice";
-import NiftyRange from "./components/NiftyRange.jsx";
+import OptionPrice from "./components/Calculators/OptionPrice";
+import NiftyRange from "./components/Calculators/NiftyRange";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Camarilla from "./components/Camarilla.jsx";
+import Camarilla from "./components/Calculators/Camarilla";
 
-function App() {
-  const [progress, setProgress] = useState(0)
+const App = ()=> {
+  const [progress, setProgress] = useState(0);
   return (
     <>
       <LoadingBar
@@ -75,7 +75,7 @@ function App() {
                 theme="colored"
                 limit="3"
             />
-        <Footer />
+            <Footer/>
       </Router>
     </>
   );

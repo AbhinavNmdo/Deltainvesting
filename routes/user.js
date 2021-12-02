@@ -11,7 +11,6 @@ router.post("/auth/signup", async (req, res) => {
   const {
     firstName,
     lastName,
-    companyName,
     address,
     email,
     phone,
@@ -21,7 +20,6 @@ router.post("/auth/signup", async (req, res) => {
   if (
     !firstName &&
     !lastName &&
-    !companyName &&
     !address &&
     !email &&
     !phone &&
@@ -45,7 +43,6 @@ router.post("/auth/signup", async (req, res) => {
           user = User.create({
             firstName,
             lastName,
-            companyName,
             address,
             email,
             phone,

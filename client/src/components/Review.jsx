@@ -62,7 +62,7 @@ const Review = (props) => {
             <div className="my-4">
                 <h1 align="center">Students Review</h1>
             </div>
-            <div className="container">
+            <div className="container" style={{minHeight: '100vh'}}>
                 {review.map((reviews) => {
                     return (
                         <div className="row">

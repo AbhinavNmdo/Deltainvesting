@@ -41,7 +41,7 @@ const Login = (props) => {
 
   return (
     <div style={{background: 'url(https://static.vecteezy.com/system/resources/previews/002/062/658/non_2x/business-candle-stick-graph-chart-of-stock-market-investment-trading-on-white-background-design-bullish-point-trend-of-graph-illustration-vector.jpg) center'}}>
-      <div className="container p-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '90vh' }}>
+      <div className="container p-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '89vh' }}>
         <div className="card d-flex flex-column justify-content-center align-items-center" style={{ borderRadius: '13px', boxShadow: '1px 1px 20px' }}>
           <h1 className="my-4">Login</h1>
           <form onSubmit={handleOnSubmit} style={{ width: '300px', padding: '10px' }}>

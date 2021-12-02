@@ -30,16 +30,16 @@ const Navbar = (props) => {
     }
   };
   window.addEventListener("scroll", handleOnScroll);
-  
-  const toggle = ()=>{
-    if(expand){
+
+  const toggle = () => {
+    if (expand) {
       ref.current.click();
       setExpand(false);
     }
   }
 
-  const handleLogout = (e)=>{
-  e.preventDefault();
+  const handleLogout = (e) => {
+    e.preventDefault();
     toggle();
     localStorage.clear();
     history.push('/login');
@@ -50,17 +50,20 @@ const Navbar = (props) => {
 
   return (
     <>
-      <div style={{ height: "4rem" }}>
+      <div style={{
+        height: "4rem", transition: "all"
+      }}>
         <nav
           id="navbar"
-          className={`navbar navbar-expand-lg navbar-dark ${
-            location.pathname !== "/" ? "bg-dark" : ""
-          } ${nav} ${burger}`}
-          style={{backgroundColor:
-            location.pathname === "/" ? "rgba(255, 255, 255, 0)" : "#212529",
-          transition: "all",
-          transitionDuration: location.pathname === '/'? "0.5s": 'unset',
-          zIndex: '100'}}
+          className={`navbar navbar-expand-lg navbar-dark ${location.pathname !== "/" ? "bg-dark" : ""
+            } ${nav} ${burger}`}
+          style={{
+            backgroundColor:
+              location.pathname === "/" ? "rgba(255, 255, 255, 0)" : "#212529",
+            transition: "all",
+            transitionDuration: location.pathname === '/' ? "0.5s" : 'unset',
+            zIndex: '100'
+          }}
         >
           <div className="container-fluid">
             <Link key="home" className="navbar-brand" to="/">
@@ -87,9 +90,8 @@ const Navbar = (props) => {
                 <li className="nav-item">
                   <Link
                     key="home"
-                    className={`nav-link ${
-                      location.pathname === "/" ? "active" : ""
-                    }`}
+                    className={`nav-link ${location.pathname === "/" ? "active" : ""
+                      }`}
                     aria-current="page"
                     to="/"
                     onClick={toggle}
@@ -101,9 +103,8 @@ const Navbar = (props) => {
                   <Link
                     smooth
                     key="about"
-                    className={`nav-link ${
-                      location.pathname === "/about" ? "active" : ""
-                    }`}
+                    className={`nav-link ${location.pathname === "/about" ? "active" : ""
+                      }`}
                     to="/about"
                     onClick={toggle}
                   >
@@ -113,9 +114,8 @@ const Navbar = (props) => {
                 <li className="nav-item">
                   <Link
                     key="calc"
-                    className={`nav-link ${
-                      location.pathname === "/calculators" ? "active" : ""
-                    }`}
+                    className={`nav-link ${location.pathname === "/calculators" ? "active" : ""
+                      }`}
                     to="/courses"
                     onClick={toggle}
                   >
@@ -125,9 +125,8 @@ const Navbar = (props) => {
                 <li className="nav-item">
                   <Link
                     key="review"
-                    className={`nav-link ${
-                      location.pathname === "/reviews" ? "active" : ""
-                    }`}
+                    className={`nav-link ${location.pathname === "/reviews" ? "active" : ""
+                      }`}
                     to="/reviews"
                     onClick={toggle}
                   >

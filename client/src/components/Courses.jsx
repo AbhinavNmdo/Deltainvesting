@@ -44,7 +44,7 @@ const Cources = (props) => {
   return (
     <div className="container my-4">
       <h1 style={{ textAlign: 'center', margin: '65px' }}>Courses Available</h1>
-      <div className="row">
+      <div className="row" style={{minHeight: '100vh'}}>
         {classes.map((classs) => {
           return (
             <div className="col-md-6" key={classs.name}>
