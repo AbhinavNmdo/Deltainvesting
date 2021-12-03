@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const BlackSchole = () => {
     const gaussian = require('gaussian')
     const [value, setValue] = useState(0);
-    const [solu, setSolu] = useState({call: 0, put: 0, dcall: 0, dput: 0})
+    const [solu, setSolu] = useState({call: 0, put: 0, dcall: 0, dput: 0, gamma: 0, theta_call: 0, theta_put: 0, vega: 0, rho_call: 0, rho_put: 0})
 
     const handleChange = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -12,35 +12,108 @@ const BlackSchole = () => {
     const BScal = (e) => {
         e.preventDefault();
         const days = parseFloat(value.t / 365)
+        const dividend_yeild = 0;   //! By default it is 0
+
+        /* -------------------------------------------------------------------------- */
+        /*                  // * Initial Calculations of Option Price                 */
+        /* -------------------------------------------------------------------------- */
+
         const r1 = (parseFloat(value.EX) * (Math.exp((-parseFloat(value.rf) / 100) * parseFloat(days))));
 
         const r2 = ((parseFloat(value.a) / 100) * Math.pow(days, 0.5));
 
-        const r3 = (((Math.log(parseFloat(value.P) / parseFloat(value.EX))) + ((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5))));
+        const d1 = (((Math.log(parseFloat(value.P) / parseFloat(value.EX))) + ((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5))));
 
-        const r4 = (parseFloat(r3) - parseFloat(r2));
+        const d2 = (parseFloat(d1) - parseFloat(r2));
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                         // * Delta Call Put Values                         */
+        /* -------------------------------------------------------------------------- */
 
         var distribution1 = gaussian(0, 1);
         var distribution2 = gaussian(0, 1);
-        const r5 = distribution1.cdf(r3)
 
-        const delta_put = parseFloat(r5) - 1
+        const delta_call = distribution1.cdf(d1)
 
-        const r6 = distribution2.cdf(r4)
+        const delta_put = parseFloat(delta_call) - 1
 
-        const call = parseFloat(value.P) * parseFloat(r5) - ((parseFloat(value.EX) * parseFloat(r6)) / Math.exp(parseFloat(value.rf / 100) * parseFloat(days)))
+        /* -------------------------------------------------------------------------- */
+        /*                                 //TODO: Need to check                                */
+        /* -------------------------------------------------------------------------- */
+        const back_loan = distribution2.cdf(d2);
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                            // * Call Put Values                            */
+        /* -------------------------------------------------------------------------- */
+
+        const call = parseFloat(value.P) * parseFloat(delta_call) - ((parseFloat(value.EX) * parseFloat(back_loan)) / Math.exp(parseFloat(value.rf / 100) * parseFloat(days)))
 
         const put = (parseFloat(call) + parseFloat(r1)) - parseFloat(value.P)
 
+
+        /* -------------------------------------------------------------------------- */
+        /*                         // * Gamma Call put values                         */
+        /* -------------------------------------------------------------------------- */
+
+        const gamma_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * Math.exp(dividend_yeild) / (parseFloat(r1) * parseFloat(r2));
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                         // * Theta Call Put values                         */
+        /* -------------------------------------------------------------------------- */
+
+        const theta_call = (-(parseFloat(r1) * Math.exp(-1 * Math.pow(parseFloat(d1), 2) / 2) / Math.sqrt(2 * Math.PI) * parseFloat(value.a) * Math.exp(dividend_yeild) / (2 * Math.sqrt(days))) - (parseFloat(value.rf/100) * (parseFloat(value.EX) * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days))*distribution2.cdf(d2))) + (dividend_yeild*parseFloat(r1)*delta_call*Math.exp(dividend_yeild)))                    //! Need fixes
+
+        const theta_put = (-(parseFloat(r1) * Math.exp(-1 * Math.pow(parseFloat(d1), 2) / 2) / Math.sqrt(2 * Math.PI) * parseFloat(value.a) * Math.exp(dividend_yeild) / (2 * Math.sqrt(days))) + (parseFloat(value.rf/100) * (parseFloat(value.EX) * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days))*distribution2.cdf(-(d2)))) + (dividend_yeild*parseFloat(r1)*distribution1.cdf(-(d1))*Math.exp(dividend_yeild)))                    //! Need fixes
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                          // * Vega Call Put values                         */
+        /* -------------------------------------------------------------------------- */
+
+        const vega_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * Math.exp(dividend_yeild) * parseFloat(r1) * Math.sqrt(days)/100
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                          // * Rho Call Put Values                          */
+        /* -------------------------------------------------------------------------- */
+
+        const rho_call = parseFloat(value.EX) * days * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days)) * delta_call / 100
+
+        const rho_put = parseFloat(value.EX) * days * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days)) * distribution1.cdf(-(d1)) / 100
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                    // * Rounding the values after decimal                  */
+        /* -------------------------------------------------------------------------- */
+
         const callr = Math.round((call + Number.EPSILON) * 100) / 100
         const putr = Math.round((put + Number.EPSILON) * 100) / 100
-        const dcallr = Math.round((r5 + Number.EPSILON) * 100) / 100
-        const dputr = Math.round((delta_put + Number.EPSILON) * 100) / 100
+        const delta_callr = Math.round((delta_call + Number.EPSILON) * 100) / 100
+        const delta_putr = Math.round((delta_put + Number.EPSILON) * 100) / 100
+        const gamma = Math.round((gamma_calc + Number.EPSILON) * 10000) / 10000
+        const vegar = Math.round((vega_calc + Number.EPSILON) * 100) / 100
+        const rho_callr = Math.round((rho_call + Number.EPSILON) * 100) / 100
+        const rho_putr = Math.round((rho_put + Number.EPSILON) * 100) / 100
+        /* -------------------- //? Rouding the theta call & put -------------------- */
 
-        setSolu(solu=>({...solu, dcall: dcallr}))
-        setSolu(solu=>({...solu, dput: dputr}))
+
+        /* -------------------------------------------------------------------------- */
+        /*                // * Setting the value into usestate hoooook                */
+        /* -------------------------------------------------------------------------- */
+
+        setSolu(solu=>({...solu, dcall: delta_callr}))
+        setSolu(solu=>({...solu, dput: delta_putr}))
         setSolu(solu=>({...solu, call: callr}))
         setSolu(solu=>({...solu, put: putr}))
+        setSolu(solu=>({...solu, gamma}))
+        setSolu(solu=>({...solu, theta_call}))
+        setSolu(solu=>({...solu, theta_put}))
+        setSolu(solu=>({...solu, vega: vegar}))
+        setSolu(solu=>({...solu, rho_call: rho_callr}))
+        setSolu(solu=>({...solu, rho_put: rho_putr}))
     }
     return (
         <>
@@ -125,8 +198,23 @@ const BlackSchole = () => {
                                         </tr>
                                         <tr>
                                             <th scope="row">Gamma</th>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>{solu.gamma}</td>
+                                            <td>XXXX</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Theta</th>
+                                            <td>{solu.theta_call}</td>
+                                            <td>{solu.theta_put}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Vega</th>
+                                            <td>{solu.vega}</td>
+                                            <td>XXXX</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Rho</th>
+                                            <td>{solu.rho_call}</td>
+                                            <td>{solu.rho_put}</td>
                                         </tr>
                                     </tbody>
                                 </table>

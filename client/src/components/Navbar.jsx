@@ -101,7 +101,6 @@ const Navbar = (props) => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    smooth
                     key="about"
                     className={`nav-link ${location.pathname === "/about" ? "active" : ""
                       }`}
