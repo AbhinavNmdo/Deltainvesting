@@ -11,8 +11,14 @@ const BlackSchole = () => {
 
     const BScal = (e) => {
         e.preventDefault();
+        const dividend_yeild = 0;
+        const e_qt = Math.exp(dividend_yeild);   //! By default it is 0
         const days = parseFloat(value.t / 365)
-        const dividend_yeild = 0;   //! By default it is 0
+        const csp = parseFloat(value.P);
+        const sp = parseFloat(value.EX);
+        const intr = parseFloat(value.rf) / 100;
+        const volat = parseFloat(value.a) / 100;
+        const Xe_rt = sp * Math.exp(-(intr * days));
 
         /* -------------------------------------------------------------------------- */
         /*                  // * Initial Calculations of Option Price                 */
@@ -39,7 +45,7 @@ const BlackSchole = () => {
         const delta_put = parseFloat(delta_call) - 1
 
         /* -------------------------------------------------------------------------- */
-        /*                                 //TODO: Need to check                                */
+        /*                            //TODO: Need to check                           */
         /* -------------------------------------------------------------------------- */
         const back_loan = distribution2.cdf(d2);
 
@@ -57,23 +63,21 @@ const BlackSchole = () => {
         /*                         // * Gamma Call put values                         */
         /* -------------------------------------------------------------------------- */
 
-        const gamma_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * Math.exp(dividend_yeild) / (parseFloat(r1) * parseFloat(r2));
+        const gamma_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * e_qt / (parseFloat(r1) * parseFloat(r2));
 
 
         /* -------------------------------------------------------------------------- */
         /*                         // * Theta Call Put values                         */
         /* -------------------------------------------------------------------------- */
 
-        const theta_call = (-(parseFloat(r1) * Math.exp(-1 * Math.pow(parseFloat(d1), 2) / 2) / Math.sqrt(2 * Math.PI) * parseFloat(value.a) * Math.exp(dividend_yeild) / (2 * Math.sqrt(days))) - (parseFloat(value.rf/100) * (parseFloat(value.EX) * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days))*distribution2.cdf(d2))) + (dividend_yeild*parseFloat(r1)*delta_call*Math.exp(dividend_yeild)))                    //! Need fixes
-
-        const theta_put = (-(parseFloat(r1) * Math.exp(-1 * Math.pow(parseFloat(d1), 2) / 2) / Math.sqrt(2 * Math.PI) * parseFloat(value.a) * Math.exp(dividend_yeild) / (2 * Math.sqrt(days))) + (parseFloat(value.rf/100) * (parseFloat(value.EX) * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days))*distribution2.cdf(-(d2)))) + (dividend_yeild*parseFloat(r1)*distribution1.cdf(-(d1))*Math.exp(dividend_yeild)))                    //! Need fixes
+        const theta_call = (-(csp * Math.exp( -1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * volat * e_qt / (2 * Math.sqrt(days / 100) )) - (intr * Xe_rt * back_loan) + (dividend_yeild * csp * delta_call * e_qt)) / days;
 
 
         /* -------------------------------------------------------------------------- */
         /*                          // * Vega Call Put values                         */
         /* -------------------------------------------------------------------------- */
 
-        const vega_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * Math.exp(dividend_yeild) * parseFloat(r1) * Math.sqrt(days)/100
+        const vega_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * e_qt * parseFloat(r1) * Math.sqrt(days)/100
 
 
         /* -------------------------------------------------------------------------- */
@@ -110,7 +114,7 @@ const BlackSchole = () => {
         setSolu(solu=>({...solu, put: putr}))
         setSolu(solu=>({...solu, gamma}))
         setSolu(solu=>({...solu, theta_call}))
-        setSolu(solu=>({...solu, theta_put}))
+        // setSolu(solu=>({...solu, theta_put}))
         setSolu(solu=>({...solu, vega: vegar}))
         setSolu(solu=>({...solu, rho_call: rho_callr}))
         setSolu(solu=>({...solu, rho_put: rho_putr}))
@@ -199,7 +203,7 @@ const BlackSchole = () => {
                                         <tr>
                                             <th scope="row">Gamma</th>
                                             <td>{solu.gamma}</td>
-                                            <td>XXXX</td>
+                                            <td>{solu.gamma}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Theta</th>
@@ -209,7 +213,7 @@ const BlackSchole = () => {
                                         <tr>
                                             <th scope="row">Vega</th>
                                             <td>{solu.vega}</td>
-                                            <td>XXXX</td>
+                                            <td>{solu.vega}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Rho</th>
