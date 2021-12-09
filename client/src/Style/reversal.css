@@ -26,3 +26,48 @@
 .greenactive{
     background-color: rgb(0, 255, 0);
 }
+.redcard{
+    animation: fading 1s 1;
+    -webkit-animation: fading 1s 1;
+}
+.greencard{
+    animation: fading 1s 1;
+    -webkit-animation: fading 1s 1;
+}
+@keyframes fading {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+#buttons{
+    margin-left: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 70vh;
+}
+.ranges{
+    padding-left: 50px;
+}
+.calc{
+    margin-top: 40px;
+}
+@media only screen and (max-width: 770px) {
+    #buttons{
+        display: flex;
+        flex-direction: row;
+        margin-left: 0px;
+        margin-bottom: 30px;
+        min-height: auto;
+    }
+    .ranges{
+        padding: 0px;
+        margin-top: 90px;
+    }
+    .calc{
+        margin-top: 10px;
+    }
+    #buttons h1{
+        margin-bottom: 0px;
+    }
+}
