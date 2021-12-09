@@ -16,6 +16,7 @@ import NiftyRange from "./components/Calculators/NiftyRange";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Camarilla from "./components/Calculators/Camarilla";
+import Reversal from "./components/Calculators/Reversal.jsx";
 
 const App = ()=> {
   const [progress, setProgress] = useState(0);
@@ -59,6 +60,9 @@ const App = ()=> {
           </Route>
           <Route exact path="/calculators/camarilla">
             <Camarilla />
+          </Route>
+          <Route exact path="/calculators/reversal">
+            <Reversal />
           </Route>
         </Switch>
         <ToastContainer

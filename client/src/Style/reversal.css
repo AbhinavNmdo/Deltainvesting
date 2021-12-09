@@ -1,0 +1,28 @@
+.redbutton{
+    height: 7rem;
+    width: 7rem;
+    background-color: rgba(134, 12, 12, 0.651);
+    margin: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    box-shadow: grey 5px 5px 5px;
+}
+.greenbutton{
+    height: 7rem;
+    width: 7rem;
+    background-color: rgba(21, 104, 21, 0.664);
+    margin: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    box-shadow: grey 5px 5px 5px;
+}
+.redactive{
+    background-color: red;
+}
+.greenactive{
+    background-color: rgb(0, 255, 0);
+}

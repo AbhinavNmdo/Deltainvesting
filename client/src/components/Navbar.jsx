@@ -167,6 +167,11 @@ const Navbar = (props) => {
                         Camarilla Calculator
                       </Link>
                     </li>
+                    <li>
+                      <Link className="dropdown-item" to="/calculators/reversal" onClick={toggle}>
+                        Reversal Calculator
+                      </Link>
+                    </li>
                   </ul>
                 </li>
               </ul>
