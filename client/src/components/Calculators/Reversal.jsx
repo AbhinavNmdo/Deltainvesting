@@ -5,6 +5,7 @@ import '../../../node_modules/animate.css/animate.css';
 const Reversal = () => {
 
     const [value, setValue] = useState({first: 0, second: 0, third: 0, fourth: 0, fifth: 0})
+    const [valuer, setValuer] = useState({first: 0, second: 0, third: 0, fourth: 0, fifth: 0})
     const [input, setInput] = useState({gcmp: value.gcmp})
 
     const handleOnClick1 = (e) => {
@@ -38,7 +39,7 @@ const Reversal = () => {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
 
-    const handleOnSubmit = (e)=>{
+    const submitGreen = (e)=>{
         e.preventDefault();
         const gcmp = parseFloat(input.gcmp)
         const gr = parseFloat(input.gr)
@@ -70,6 +71,38 @@ const Reversal = () => {
         setValue(value=>({...value, fifth: fifthr}))
     }
 
+    const submitRed = (e)=>{
+        e.preventDefault();
+        const rcmp = parseFloat(input.rcmp)
+        const rr = parseFloat(input.rr)
+        const rcltp = parseFloat(input.rcltp)
+        const rcd = parseFloat(input.rcd)
+        const rpltp = parseFloat(input.rpltp)
+        const rpd = parseFloat(input.rpd)
+
+        const callValue = rcltp / rcd;
+        const putValue = rpltp / rpd;
+        const netReversal = putValue - callValue;
+
+        const first = rcmp = netReversal;
+        const second = first * 1.001
+        const third = first * 1.002
+        const fourth = first * 1.003
+        const fifth = first * 1.004
+
+        const firstr = Math.round((first + Number.EPSILON) * 100) / 100
+        const secondr = Math.round((second + Number.EPSILON) * 100) / 100
+        const thirdr = Math.round((third + Number.EPSILON) * 100) / 100
+        const fourthr = Math.round((fourth + Number.EPSILON) * 100) / 100
+        const fifthr = Math.round((fifth + Number.EPSILON) * 100) / 100
+
+        setValuer(value=>({...value, first: firstr}))
+        setValuer(value=>({...value, second: secondr}))
+        setValuer(value=>({...value, third: thirdr}))
+        setValuer(value=>({...value, fourth: fourthr}))
+        setValuer(value=>({...value, fifth: fifthr}))
+    }
+
     return (
         <>
             <div className="container-fluid calc" style={{ minHeight: '70vh' }}>
@@ -85,7 +118,7 @@ const Reversal = () => {
                         <div id="greenc" className="card greencard p-3">
                             <div className="row">
                                 <div className="col-md-7 pe-5">
-                                    <form onSubmit={handleOnSubmit}>
+                                    <form onSubmit={submitGreen}>
                                         <div className="row g-3 align-items-center">
                                             <div className="col">
                                                 <label htmlFor="gcmp" className="col-form-label mt-4">Current Market Price: </label>
@@ -139,7 +172,7 @@ const Reversal = () => {
                                                 <input className="form-control mt-4" type="text" id="gpd" name="gpd" onChange={handleChange} />
                                             </div>
                                         </div>
-                                        <button className="btn btn-primary" type="submit">Submit</button>
+                                        <button className="btn btn-primary mt-3" type="submit">Submit</button>
                                     </form>
                                 </div>
                                 <div className="col-md-5 d-flex justify-content-center align-items-center ranges">
@@ -154,10 +187,10 @@ const Reversal = () => {
                                 </div>
                             </div>
                         </div>
-                        <div id="redc" className="card d-none redcard p-4">
+                        <div id="redc" className="card d-none redcard p-3">
                             <div className="row">
                                 <div className="col-md-7 pe-5">
-                                    <form>
+                                    <form onSubmit={submitRed}>
                                         <div className="row g-3 align-items-center">
                                             <div className="col">
                                                 <label htmlFor="rcmp" className="col-form-label mt-4">Current Market Price: </label>
@@ -211,16 +244,17 @@ const Reversal = () => {
                                                 <input className="form-control mt-4" type="number" id="rpd" name="rpd" onChange={handleChange} />
                                             </div>
                                         </div>
+                                        <button className="btn btn-primary mt-3">Submit</button>
                                     </form>
                                 </div>
                                 <div className="col-md-5 d-flex justify-content-center align-items-center ranges">
                                     <div className="d-flex flex-column justify-content-center align-items-center">
                                         <h4 className="text-center mb-5">Reversal Price Range</h4>
-                                        <h6>345345</h6>
-                                        <h6>345345</h6>
-                                        <h6>345345</h6>
-                                        <h6>345345</h6>
-                                        <h6>345345</h6>
+                                        <h6>{valuer.first}</h6>
+                                        <h6>{valuer.second}</h6>
+                                        <h6>{valuer.third}</h6>
+                                        <h6>{valuer.fourth}</h6>
+                                        <h6>{valuer.fifth}</h6>
                                     </div>
                                 </div>
                             </div>
