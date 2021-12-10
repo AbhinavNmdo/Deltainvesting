@@ -1,20 +1,27 @@
 import React from "react";
 import "../App.css";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import bull from '../Images/bullfinal.png'
+import bear from '../Images/bearfinal.png'
+import '../../node_modules/animate.css/animate.css';
 
 const HomePage = (props) => {
   return (
     <>
-      <div style={{ height: "23rem" }}>
+      <div id="parent" style={{ height: "23rem" }}>
         <div
           id="header"
           className="d-flex flex-column justify-content-center align-items-center"
           style={{ height: "25rem" }}
         >
-          <h1 align="center" style={{color: "white", fontSize: '3rem'}}>
+          <h1 align="center" style={{ color: "white", fontSize: '3rem' }}>
             Delta Investing Academy
           </h1>
-          <p style={{color: 'white', fontSize: '1.5rem' }}>सोच बदल जाएगी ...</p>
+          <p style={{ color: 'white', fontSize: '1.5rem' }}>सोच बदल जाएगी ...</p>
+        </div>
+        <div className="bullbear" style={{transform: 'translateY(10px)'}}>
+          <img src={bull} alt=".." className="img-fluid bull animate__animated animate__slideInLeft" />
+          <img src={bear} alt=".." className="img-fluid bear animate__animated animate__slideInRight" />
         </div>
       </div>
       <div className="container" style={{ overflow: "hidden" }}>
@@ -29,7 +36,7 @@ const HomePage = (props) => {
                 margin: "7px",
               }}
             >
-              <div className="card-body" style={{minHeight: '26ch'}}>
+              <div className="card-body" style={{ minHeight: '26ch' }}>
                 <h4 className="card-title my-3" align="center">
                   Our Courses
                 </h4>
@@ -59,7 +66,7 @@ const HomePage = (props) => {
                 margin: "7px",
               }}
             >
-              <div className="card-body" style={{minHeight: '26ch'}}>
+              <div className="card-body" style={{ minHeight: '26ch' }}>
                 <h4 className="card-title my-3" align="center">
                   What is Stock Market?
                 </h4>

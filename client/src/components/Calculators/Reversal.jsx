@@ -42,6 +42,7 @@ const Reversal = () => {
     const submitGreen = (e)=>{
         e.preventDefault();
         const gcmp = parseFloat(input.gcmp)
+        // eslint-disable-next-line
         const gr = parseFloat(input.gr)
         const gcltp = parseFloat(input.gcltp)
         const gcd = parseFloat(input.gcd)
@@ -73,7 +74,9 @@ const Reversal = () => {
 
     const submitRed = (e)=>{
         e.preventDefault();
+        // eslint-disable-next-line
         const rcmp = parseFloat(input.rcmp)
+        // eslint-disable-next-line
         const rr = parseFloat(input.rr)
         const rcltp = parseFloat(input.rcltp)
         const rcd = parseFloat(input.rcd)
@@ -84,6 +87,7 @@ const Reversal = () => {
         const putValue = rpltp / rpd;
         const netReversal = putValue - callValue;
 
+        // eslint-disable-next-line
         const first = rcmp = netReversal;
         const second = first * 1.001
         const third = first * 1.002
@@ -105,7 +109,7 @@ const Reversal = () => {
 
     return (
         <>
-            <div className="container-fluid calc" style={{ minHeight: '70vh' }}>
+            <div className="container-fluid calc" style={{ minHeight: '73vh' }}>
                 <div className="row h-100">
                     <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
                             {/* <h3 >Reversal Calculator</h3> */}
