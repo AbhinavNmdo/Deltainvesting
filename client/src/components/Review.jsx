@@ -17,7 +17,6 @@ const Review = (props) => {
         });
         const json = await responce.json();
         setReview(json.review);
-        console.log(json);
     };
 
     const handleOnChange = (e)=>{

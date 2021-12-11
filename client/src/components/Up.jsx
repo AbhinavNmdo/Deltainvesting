@@ -1,17 +1,32 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 
 const Up = () => {
-    const [image, setImage] = useState(null)
-    const change = (e)=>{
-        setImage(e.target.file)
-        console.log(e.target.file)
+    const [image, setImage] = useState({file: null})
+    const change = event =>{
+        console.log(event.target.files[0])
+        setImage({file: event.target.files[0]})
     }
-    const post = async (e)=>{
+    const post = async (e) => {
         e.preventDefault();
-        const res = await fetch("http://localhost:5000/api/upload", {
-            method: 'POST',
-            body: {image}
-        })
+        const formData = new FormData();
+        formData.append(
+            "file",
+            image.file
+        )
+        formData.append(
+            "name",
+            "hello"
+        )
+        formData.append(
+            "description",
+            "hellod"
+        )
+        formData.append(
+            "classLink",
+            "hellodc"
+        )
+        axios.post("http://localhost:5000/api/courses", formData)
     }
     return (
         <>

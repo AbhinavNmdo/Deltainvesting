@@ -18,10 +18,13 @@ router.get("/class/:id", async (req, res) => {
   try {
     const classes = await Class.findById(req.params.id);
     res.status(200).json({ success: true, classes });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({success: false, error: "internal error"});
+  }
 });
 
 router.post("/", (req, res) => {
+  console.log(req.files)
   try {
     if (req.files) {
       const { name, description, classLink } = req.body;
@@ -33,7 +36,7 @@ router.post("/", (req, res) => {
         thumbnail: file.name,
       });
       file.mv(
-        "../deltainvesting/client/src/Images/upload/" + file.name,
+        "../deltainvesting/client/public/Images/upload/" + file.name,
         function (err, result) {
           if (err && classes) {
             res
