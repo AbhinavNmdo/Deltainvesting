@@ -49,7 +49,7 @@ const NiftyRange = () => {
                     <div className="row mt-4">
                         <div className="col-md-6">
                             <div className="card p-3">
-                                <form>
+                                <form autocomplete="off">
                                     <div className="row g-3 align-items-center">
                                         <div className="col">
                                             <label htmlFor="ivv" className="col-form-label mt-4">India VIX Volatility: </label>

@@ -24,11 +24,11 @@ const BlackSchole = () => {
         /*                  // * Initial Calculations of Option Price                 */
         /* -------------------------------------------------------------------------- */
 
-        const r1 = (parseFloat(value.EX) * (Math.exp((-parseFloat(value.rf) / 100) * parseFloat(days))));
+        const r1 = (parseFloat(sp) * (Math.exp((-intr) * parseFloat(days))));
 
-        const r2 = ((parseFloat(value.a) / 100) * Math.pow(days, 0.5));
+        const r2 = ((volat) * Math.pow(days, 0.5));
 
-        const d1 = (((Math.log(parseFloat(value.P) / parseFloat(value.EX))) + ((parseFloat(value.rf) / 100) + (parseFloat(value.a) / 100) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5))));
+        const d1 = (((Math.log(parseFloat(csp) / parseFloat(sp))) + ((intr) + (volat) * ((parseFloat(value.a) / 100) / 2)) * parseFloat(days)) / ((parseFloat(value.a) / 100) * (Math.pow(parseFloat(days), 0.5))));
 
         const d2 = (parseFloat(d1) - parseFloat(r2));
 
@@ -54,9 +54,9 @@ const BlackSchole = () => {
         /*                            // * Call Put Values                            */
         /* -------------------------------------------------------------------------- */
 
-        const call = parseFloat(value.P) * parseFloat(delta_call) - ((parseFloat(value.EX) * parseFloat(back_loan)) / Math.exp(parseFloat(value.rf / 100) * parseFloat(days)))
+        const call = parseFloat(csp) * parseFloat(delta_call) - ((parseFloat(sp) * parseFloat(back_loan)) / Math.exp(intr * parseFloat(days)))
 
-        const put = (parseFloat(call) + parseFloat(r1)) - parseFloat(value.P)
+        const put = (parseFloat(call) + parseFloat(r1)) - parseFloat(csp)
 
 
         /* -------------------------------------------------------------------------- */
@@ -84,9 +84,9 @@ const BlackSchole = () => {
         /*                          // * Rho Call Put Values                          */
         /* -------------------------------------------------------------------------- */
 
-        const rho_call = parseFloat(value.EX) * days * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days)) * delta_call / 100
+        const rho_call = parseFloat(sp) * days * Math.exp(-1*(intr)*parseFloat(days)) * delta_call / 100
 
-        const rho_put = parseFloat(value.EX) * days * Math.exp(-1*(parseFloat(value.rf/100))*parseFloat(days)) * distribution1.cdf(-(d1)) / 100
+        const rho_put = parseFloat(sp) * days * Math.exp(-1*(intr)*parseFloat(days)) * distribution1.cdf(-(d1)) / 100
 
 
         /* -------------------------------------------------------------------------- */
@@ -128,13 +128,13 @@ const BlackSchole = () => {
                     <div className="row my-4">
                         <div className="col-md-6">
                             <div className="card p-3">
-                                <form>
+                                <form autocomplete="off">
                                     <div className="row g-3 align-items-center">
                                         <div className="col">
                                             <label htmlFor="P" className="col-form-label mt-4">Current Stock Price: </label>
                                         </div>
                                         <div className="col">
-                                            <input className="form-control mt-4" type="number" id="P" name="P" onChange={handleChange} />
+                                            <input className="form-control mt-4" type="text" id="P" name="P" onChange={handleChange} />
                                         </div>
                                     </div>
 
@@ -143,7 +143,7 @@ const BlackSchole = () => {
                                             <label htmlFor="EX" className="col-form-label mt-4">Strike Price: </label>
                                         </div>
                                         <div className="col">
-                                            <input className="form-control mt-4" type="number" name="EX" onChange={handleChange} />
+                                            <input className="form-control mt-4" type="text" name="EX" onChange={handleChange} />
                                         </div>
                                     </div>
 
@@ -152,7 +152,7 @@ const BlackSchole = () => {
                                             <label htmlFor="t" className="col-form-label mt-4">Days Remaining: </label>
                                         </div>
                                         <div className="col">
-                                            <input className="form-control mt-4" type="number" id="t" name="t" onChange={handleChange} />
+                                            <input className="form-control mt-4" type="text" id="t" name="t" onChange={handleChange} />
                                         </div>
                                     </div>
 
@@ -161,7 +161,7 @@ const BlackSchole = () => {
                                             <label htmlFor="rf" className="col-form-label mt-4">Interest Rate: </label>
                                         </div>
                                         <div className="col">
-                                            <input className="form-control mt-4" type="number" id="rf" name="rf" onChange={handleChange} />
+                                            <input className="form-control mt-4" type="text" id="rf" name="rf" onChange={handleChange} />
                                         </div>
                                     </div>
 
@@ -170,7 +170,7 @@ const BlackSchole = () => {
                                             <label htmlFor="a" className="col-form-label mt-4">Volatility: </label>
                                         </div>
                                         <div className="col">
-                                            <input className="form-control mt-4" type="number" id="a" name="a" onChange={handleChange} />
+                                            <input className="form-control mt-4" type="text" id="a" name="a" onChange={handleChange} />
                                         </div>
                                     </div>
 

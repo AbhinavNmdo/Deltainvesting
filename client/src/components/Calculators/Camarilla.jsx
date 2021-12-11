@@ -63,7 +63,7 @@ const Camarilla = () => {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card p-3">
-                            <form onSubmit={calc}>
+                            <form autocomplete="off" onSubmit={calc}>
                                 <div className="row g-3 align-items-center">
                                     <div className="col">
                                         <label htmlFor="ivv" className="col-form-label mt-4">High: </label>
