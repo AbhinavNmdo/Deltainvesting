@@ -24,7 +24,6 @@ router.get("/class/:id", async (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.files)
   try {
     if (req.files) {
       const { name, description, classLink } = req.body;
@@ -56,6 +55,7 @@ router.post("/", (req, res) => {
         classLink,
         thumbnail: null,
       });
+      res.status(201).json({success: true, classes})
     }
   } catch (error) {
     console.log(error);

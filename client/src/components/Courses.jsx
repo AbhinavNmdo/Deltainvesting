@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import image from '../Images/upload/bullbear.jpg'
 
 const Cources = (props) => {
   const initialClasses = [];

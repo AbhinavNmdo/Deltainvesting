@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import axios from 'axios';
 
 const Up = () => {
     const [image, setImage] = useState({file: null})
@@ -26,13 +25,21 @@ const Up = () => {
             "classLink",
             "hellodc"
         )
-        axios.post("http://localhost:5000/api/courses", formData)
+        // axios.post("http://localhost:5000/api/courses", formData)
+        const res = await fetch("http://localhost:5000/api/courses", {
+            method: "POST",
+            body: formData
+        })
+        const json = await res.json()
+        if(json.success){
+            document.querySelector('#file').value = null
+        }
     }
     return (
         <>
             <div>
                 <form onSubmit={post} encType="multipart/form-data">
-                    <input type="file" onChange={change}/>
+                    <input type="file" id="file" onChange={change}/>
                     <button className="btn btn-primary" type="submit">Submit</button>
                 </form>
             </div>
