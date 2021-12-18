@@ -18,6 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Camarilla from "./components/Calculators/Camarilla";
 import Reversal from "./components/Calculators/Reversal.jsx";
 import Up from "./components/Up.jsx";
+import Forgot from "./components/Forgot.jsx";
+import Reset from "./components/Reset.jsx";
 
 const App = ()=> {
   const [progress, setProgress] = useState(0);
@@ -67,6 +69,12 @@ const App = ()=> {
           </Route>
           <Route exact path="/upload">
             <Up />
+          </Route>
+          <Route exact path="/forgot-password">
+            <Forgot toast={toast} />
+          </Route>
+          <Route exact path="/reset-password/:id/:token">
+            <Reset toast={toast} />
           </Route>
         </Switch>
         <ToastContainer

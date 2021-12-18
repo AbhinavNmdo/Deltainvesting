@@ -14,6 +14,7 @@ const Login = (props) => {
 
   // const host = "http://localhost:5000"
   const host = "https://deltainvesting.herokuapp.com"
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const responce = await fetch(`${host}/api/user/auth/login`, {
@@ -27,6 +28,7 @@ const Login = (props) => {
       })
     });
     const json = await responce.json();
+    console.log(json);
     if (json.success) {
       localStorage.setItem('auth-token', json.authtoken_login);
       history.push('/')
@@ -56,7 +58,7 @@ const Login = (props) => {
             <div className="row mb-4">
 
               <div className="col text-center">
-                <a href="#!">Forgot password?</a>
+                <a href="/forgot-password">Forgot password?</a>
               </div>
             </div>
 

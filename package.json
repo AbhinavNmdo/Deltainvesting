@@ -23,6 +23,7 @@
     "heroku": "^7.59.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.11",
+    "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15"
   }
 }

@@ -86,17 +86,6 @@ const Signup = (props) => {
               </div>
             </div>
 
-            {/* <div className="form-outline mb-4">
-              <input
-                type="text"
-                id="companyname"
-                name="companyName"
-                placeholder="Company Name"
-                className="form-control"
-                onChange={handleOnChange}
-              />
-            </div> */}
-
             <div className="form-outline mb-4">
               <input
                 type="text"
@@ -135,28 +124,6 @@ const Signup = (props) => {
               </div>
             </div>
 
-            {/* <div className="form-outline mb-4">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-control"
-                placeholder="E-Mail"
-                onChange={handleOnChange}
-              />
-            </div>
-
-            <div className="form-outline mb-4">
-              <input
-                type="number"
-                id="phone"
-                name="phone"
-                className="form-control"
-                placeholder="Phone"
-                onChange={handleOnChange}
-              />
-            </div> */}
-
             <div className="row mb-4">
               <div className="col">
                 <div className="form-outline">
@@ -183,28 +150,6 @@ const Signup = (props) => {
                 </div>
               </div>
             </div>
-
-            {/* <div className="form-outline mb-4">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="form-control"
-                placeholder="Password"
-                onChange={handleOnChange}
-              />
-            </div>
-
-            <div className="form-outline mb-4">
-              <input
-                type="password"
-                id="cpassword"
-                name="cpassword"
-                className="form-control"
-                placeholder="Confirm-Password"
-                onChange={handleOnChange}
-              />
-            </div> */}
 
             <div className="text-center">
               <button type="submit" className="btn btn-primary my-2 btn-block">

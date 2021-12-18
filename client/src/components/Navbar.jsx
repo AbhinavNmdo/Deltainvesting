@@ -148,6 +148,11 @@ const Navbar = (props) => {
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
+                      <Link className="dropdown-item" to="/calculators/reversal" onClick={toggle}>
+                        Reversal Calculator
+                      </Link>
+                    </li>
+                    <li>
                       <Link
                         key="cources"
                         className="dropdown-item"
@@ -165,11 +170,6 @@ const Navbar = (props) => {
                     <li>
                       <Link className="dropdown-item" to="/calculators/camarilla" onClick={toggle}>
                         Camarilla Calculator
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item" to="/calculators/reversal" onClick={toggle}>
-                        Reversal Calculator
                       </Link>
                     </li>
                   </ul>

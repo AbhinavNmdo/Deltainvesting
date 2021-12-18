@@ -4,8 +4,20 @@ import { Link } from "react-router-dom";
 import bull from '../Images/bullfinal.png'
 import bear from '../Images/bearfinal.png'
 import '../../node_modules/animate.css/animate.css';
+// import Video from 'video.js/dist/video.js';
+import 'video.js/dist/video-js.css'
 
 const HomePage = (props) => {
+  // const videoJsOptions = {
+  //   autoplay: true,
+  //   controls: true,
+  //   responsive: true,
+  //   fluid: true,
+  //   sources: [{
+  //     src: '/path/to/video.mp4',
+  //     type: 'video/mp4'
+  //   }]
+  // }
   return (
     <>
       <div id="parent" style={{ height: "23rem" }}>
@@ -19,7 +31,7 @@ const HomePage = (props) => {
           </h1>
           <p style={{ color: 'white', fontSize: '1.5rem' }}>सोच बदल जाएगी ...</p>
         </div>
-        <div className="bullbear" style={{transform: 'translateY(10px)'}}>
+        <div className="bullbear" style={{ transform: 'translateY(10px)' }}>
           <img src={bull} alt=".." className="img-fluid bull animate__animated animate__slideInLeft" />
           <img src={bear} alt=".." className="img-fluid bear animate__animated animate__slideInRight" />
         </div>
@@ -54,6 +66,7 @@ const HomePage = (props) => {
                 allowFullScreen="allowfullscreen"
                 style={{ borderRadius: "10px" }}
               ></iframe>
+              <source sec={"./Videos/Welcome.mp4"} type="video/mp4" />
             </div>
           </div>
           <div className="col-md-6">
