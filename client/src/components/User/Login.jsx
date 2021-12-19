@@ -59,7 +59,7 @@ const Login = (props) => {
 
             <div className="row mb-4">
               <div className="col text-center">
-                <a href="/forgot-password">Forgot password?</a>
+                <Link to="/forgot-password">Forgot password?</Link>
               </div>
             </div>
 
