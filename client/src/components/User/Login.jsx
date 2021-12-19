@@ -13,8 +13,8 @@ const Login = (props) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const host = "http://localhost:5000"
-  // const host = "https://deltainvesting.herokuapp.com"
+  // const host = "http://localhost:5000"
+  const host = "https://deltainvesting.herokuapp.com"
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
