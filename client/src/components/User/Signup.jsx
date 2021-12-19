@@ -53,7 +53,7 @@ const Signup = (props) => {
 
   return (
     <>
-      <div className="d-flex justify-content-center align-items-center user-back">
+      <div className="d-flex justify-content-center align-items-center user-back" style={{height: '89vh'}} >
         <div className="container card p-3 w-50 center-card">
           <h1 className="center text-center mb-5">
             Register Yourself

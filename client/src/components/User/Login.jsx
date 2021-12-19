@@ -43,7 +43,7 @@ const Login = (props) => {
   }
 
   return (
-    <div className="user-back">
+    <div className="d-flex justify-content-center align-items-center user-back" style={{height: '89vh'}}>
       <div className="center">
         <div className="container p-3 center-card">
           <h1 className="text-center mb-5">Login</h1>
