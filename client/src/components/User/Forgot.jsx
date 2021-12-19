@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import '../../Style/user.css'
 
 const Forgot = (props) => {
     const host = "https://deltainvesting.herokuapp.com";
