@@ -1,0 +1,18 @@
+.user-back{
+    background: url(../Images/background.jpg) bottom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 89vh;
+};
+.center{
+    display: flex;
+    height: 89vh;
+    justify-content: center;
+    align-items: center;
+}
+.center-card{
+    border-radius: 13px;
+    box-shadow: 1px 1px 20px;
+    background: white;
+}
