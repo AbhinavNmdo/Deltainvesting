@@ -30,6 +30,7 @@ const HomePage = (props) => {
             Delta Investing Academy
           </h1>
           <p style={{ color: 'white', fontSize: '1.5rem' }}>सोच बदल जाएगी ...</p>
+          {/* <img src="https://fontmeme.com/permalink/211220/85f20f9d73d77e2cfda9705b8428ce67.png" alt="3d-rotation" border="0" /> */}
         </div>
         <div className="bullbear" style={{ transform: 'translateY(10px)' }}>
           <img src={bull} alt=".." className="img-fluid bull animate__animated animate__slideInLeft" />

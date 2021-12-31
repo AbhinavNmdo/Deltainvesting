@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cources = (props) => {
@@ -8,6 +8,7 @@ const Cources = (props) => {
   // const host = "http://localhost:5000"
   const host = "https://deltainvesting.herokuapp.com"
   const getClass = async () => {
+    // props.setProgress(50)
     const responce = await fetch(`${host}/api/courses`, {
       method: 'GET',
       headers: {
@@ -15,6 +16,7 @@ const Cources = (props) => {
       }
     });
     const json = await responce.json();
+    // props.setProgress(100)
     setClasses(json.classes);
   }
 
@@ -23,9 +25,9 @@ const Cources = (props) => {
     props.toast.warning('You need to Login First')
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getClass()
-  }, [getClass])
+  })
 
   return (
     <div className="container my-4">
