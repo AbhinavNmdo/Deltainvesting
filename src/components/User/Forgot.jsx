@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../../Style/user.css'
 
 const Forgot = (props) => {
-    const host = "https://deltainvesting.herokuapp.com";
+    // const host = "https://deltainvesting.herokuapp.com";
     // const host = "http://localhost:5000"
 
     const [value, setValue] = useState({ email: '' })
@@ -14,7 +14,7 @@ const Forgot = (props) => {
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         props.setProgress(30)
-        const res = await fetch(`${host}/api/user/forgot-password`, {
+        const res = await fetch(`${process.env.REACT_APP_HOSTURI}/api/user/forgot-password`, {
             method: 'POST',
             headers: {
                 "Content-type": 'application/json'

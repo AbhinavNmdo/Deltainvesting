@@ -14,12 +14,12 @@ const Login = (props) => {
   };
 
   // const host = "http://localhost:5000"
-  const host = "https://deltainvesting.herokuapp.com"
+  // const host = "https://deltainvesting.herokuapp.com"
 
   const handleOnSubmit = async (e) => {
     props.setProgress(40)
     e.preventDefault();
-    const responce = await fetch(`${host}/api/user/auth/login`, {
+    const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/user/auth/login`, {
       method: 'POST',
       headers: {
         "Content-type": "application/json"
@@ -31,15 +31,16 @@ const Login = (props) => {
     });
     props.setProgress(70)
     const json = await responce.json();
-    props.setProgress(100)
     if (json.success) {
       localStorage.setItem('auth-token', json.authtoken_login);
+      props.setProgress(100)
       navigate('/')
       setTimeout(() => {
         props.toast.success("Login Successfully")
       }, 300);
     }
     else {
+      props.setProgress(100)
       props.toast.error("Invalid Username or Password")
     }
 

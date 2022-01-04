@@ -16,7 +16,7 @@ const About = (props) => {
                     </div>
                 </div>
                 <div className="col-md-9" style={{fontFamily: 'Dancing Script'}}>
-                    <h3 style={{textAlign:'justify'}}>Delta investing academy is founded by CFA Tarun Bhatia a qualified Chartered Financial Analyst from ICFAI University, in year 2008 holding Diploma in Finance, Advance Diploma in Finance and Masters of Economics.</h3>
+                    <h3 style={{textAlign:'justify'}}>Investing Delta Academy is founded by CFA Tarun Bhatia a qualified Chartered Financial Analyst from ICFAI University, in year 2008 holding Diploma in Finance, Advance Diploma in Finance and Masters of Economics.</h3>
                     <br />
                     <h3 style={{textAlign:'justify'}}>The founder has potential of knowledge and experience in securities market of more than 14 years worked with an SEBI registered stock brokers for more than 11 years .</h3>
                     <br />

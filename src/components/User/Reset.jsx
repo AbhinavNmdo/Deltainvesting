@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Reset = (props) => {
@@ -9,11 +9,11 @@ const Reset = (props) => {
     const navigate = useNavigate();
 
     // const host = "http://localhost:5000"
-    const host = "https://deltainvesting.herokuapp.com";
+    // const host = "https://deltainvesting.herokuapp.com";
 
     const fetchReset = async () => {
         props.setProgress(30)
-        const res = await fetch(`${host}/api/user/reset-password/authentication`, {
+        const res = await fetch(`${process.env.REACT_APP_HOSTURI}/api/user/reset-password/authentication`, {
             method: 'GET',
             headers: {
                 "id": id,
@@ -32,7 +32,10 @@ const Reset = (props) => {
         }
     }
 
-    fetchReset();
+    useEffect(() => {
+        fetchReset();
+        // eslint-disable-next-line
+    }, [])
 
     const [value, setValue] = useState({ password: '', cpassword: '' })
 
@@ -42,7 +45,8 @@ const Reset = (props) => {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch(`${host}/api/user/reset-password`, {
+        props.setProgress(30)
+        const res = await fetch(`${process.env.REACT_APP_HOSTURI}/api/user/reset-password`, {
             method: 'POST',
             headers: {
                 "Content-type": 'application/json',
@@ -54,8 +58,10 @@ const Reset = (props) => {
                 cpassword: value.cpassword
             })
         })
+        props.setProgress(70)
         const json = await res.json();
         if (json.success) {
+            props.setProgress(100)
             setTimeout(() => {
                 navigate('/login')
                 props.toast.success("Password Changed Successfully")

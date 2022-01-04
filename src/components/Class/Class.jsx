@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 
-const Class = () => {
+const Class = (props) => {
     const { id } = useParams();
     const initial = [];
     const [body, setBody] = useState(initial)
 
     // const host = "http://localhost:5000"
-    const host = "https://deltainvesting.herokuapp.com"
+    // const host = "https://deltainvesting.herokuapp.com"
 
     const fetchClass = async () => {
-        const responce = await fetch(`${host}/api/courses/class/${id}`, {
+        props.setProgress(30)
+        const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/courses/class/${id}`, {
             method: 'GET',
             headers: {
                 "Content-type": "application/json"
             }
         });
+        props.setProgress(70)
         const json = await responce.json();
         setBody(json.classes);
+        props.setProgress(100)
     }
 
     useEffect(() => {

@@ -70,7 +70,7 @@ const Navbar = (props) => {
         >
           <div className="container-fluid">
             <Link key="home" className="navbar-brand" to="/">
-              <h3 className="pt-1">Delta Investing</h3>
+              <h3 className="pt-1">Investing Delta</h3>
             </Link>
             <button
               className="navbar-toggler"

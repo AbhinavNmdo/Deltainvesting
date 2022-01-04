@@ -6,18 +6,19 @@ const Cources = (props) => {
   const [classes, setClasses] = useState(initialClasses);
 
   // const host = "http://localhost:5000"
-  const host = "https://deltainvesting.herokuapp.com"
+  // const host = "https://deltainvesting.herokuapp.com"
   const getClass = async () => {
-    // props.setProgress(50)
-    const responce = await fetch(`${host}/api/courses`, {
+    props.setProgress(50)
+    const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/courses`, {
       method: 'GET',
       headers: {
         "Content-type": "application/json"
       }
     });
     const json = await responce.json();
-    // props.setProgress(100)
+    props.setProgress(70)
     setClasses(json.classes);
+    props.setProgress(100)
   }
 
 
@@ -27,7 +28,7 @@ const Cources = (props) => {
 
   useEffect(() => {
     getClass()
-  })
+  }, [])
 
   return (
     <div className="container my-4">

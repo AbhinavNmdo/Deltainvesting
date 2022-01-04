@@ -20,11 +20,11 @@ const Signup = (props) => {
   };
 
   // const host = "http://localhost:5000"
-  const host = "https://deltainvesting.herokuapp.com"
+  // const host = "https://deltainvesting.herokuapp.com"
   const handleOnSubmit = async (e) => {
     props.setProgress(30)
     e.preventDefault();
-    const responce = await fetch(`${host}/api/user/auth/signup`, {
+    const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/user/auth/signup`, {
       method: 'POST',
       headers: {
         "Content-type": "application/json"

@@ -26,10 +26,12 @@ const HomePage = (props) => {
           className="d-flex flex-column justify-content-center align-items-center"
           style={{ height: "25rem" }}
         >
-          <h1 align="center" style={{ color: "white", fontSize: '3rem' }}>
-            Delta Investing Academy
+          <Link to="/" style={{textDecoration: 'none'}}>
+          <h1 align="center" style={{ color: "white", fontSize: '3.7rem', fontFamily: 'Kalam' }}>
+            Investing Delta Academy
           </h1>
-          <p style={{ color: 'white', fontSize: '1.5rem' }}>सोच बदल जाएगी ...</p>
+          </Link>
+          <p style={{ color: 'white', fontSize: '2.3rem', fontFamily: 'krutidev', marginBottom: '50px', zIndex: '1000' }}>lksp cny tk,xh ---</p>
           {/* <img src="https://fontmeme.com/permalink/211220/85f20f9d73d77e2cfda9705b8428ce67.png" alt="3d-rotation" border="0" /> */}
         </div>
         <div className="bullbear" style={{ transform: 'translateY(10px)' }}>

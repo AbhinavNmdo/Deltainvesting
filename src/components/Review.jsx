@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
-// import StarRatingComponent from 'react-star-rating-component';
 
 const Review = (props) => {
-
     const [review, setReview] = useState([]);
     const [write, setWrite] = useState({review: ""})
 
-    // const host = "http://localhost:5000"
-    const host = "https://deltainvesting.herokuapp.com"
     const getReview = async () => {
-        const responce = await fetch(`${host}/api/review`, {
+        props.setProgress(30)
+        const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/review`, {
             method: 'GET',
             headers: {
                 "Content-type": "application/json"
             }
         });
+        props.setProgress(70)
         const json = await responce.json();
         setReview(json.review);
+        props.setProgress(100)
     };
+
+    useEffect(() => {
+        getReview();
+        // eslint-disable-next-line
+    }, [])
 
     const handleOnChange = (e)=>{
         setWrite({...write, [e.target.name]: [e.target.value]})
@@ -25,7 +29,7 @@ const Review = (props) => {
 
 
     const addReview = async (rev)=>{
-        const responce = await fetch(`${host}/api/review`, {
+        const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/review`, {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",
@@ -52,10 +56,6 @@ const Review = (props) => {
         addReview(write.review.toString());
     }
 
-    useEffect(() => {
-        getReview();
-    })
-
     return (
         <>
             <div className="my-4">
@@ -64,7 +64,7 @@ const Review = (props) => {
             <div className="container" style={{minHeight: '100vh'}}>
                 {review.map((reviews) => {
                     return (
-                        <div className="row">
+                        <div key={reviews._id} className="row">
                             <div className="card my-3 p-3" style={{ borderRadius: '14px' }}>
                                 <h4>{reviews.firstname} {reviews.lastname}</h4>
                                 <div className="p-3" style={{ backgroundColor: '#f0f0f0', borderRadius: '10px' }}>
