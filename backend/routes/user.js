@@ -5,11 +5,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const fetchuser = require("../middleware/fetchuser");
+require("dotenv").config();
 
 const JWT_SECRET = "this$is$the$sec$string";
 
 // const host = "http://localhost:3000"
-const host = "https://deltainvesting.herokuapp.com";
+const host = "https://investingdelta.herokuapp.com";
 
 const transport = nodemailer.createTransport({
   service: "gmail",
