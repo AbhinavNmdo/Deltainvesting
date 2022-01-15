@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../../Style/reversal.css'
 import '../../../node_modules/animate.css/animate.css';
+import tarun from '../../Images/pic.jpg'
 
 const Reversal = () => {
     useEffect(() => {
@@ -126,8 +127,16 @@ const Reversal = () => {
         <>
             <div className="container mx-auto grid grid-cols-1 mb-16 lg:grid-cols-12">
                 {/* Invention Banner */}
-                <div className='col-span-12 lg:col-span-2 w-full'>
-                    photo
+                <div className='col-span-12 lg:col-span-2 w-full grid grid-cols-3 lg:grid-cols-1 justify-between border-2 border-indigo-200 rounded-4xl p-4'>
+                    <div className='flex items-center justify-center flex-col'>
+                        <img src={tarun} alt="tarun" className="rounded-3xl w-72 border-2 border-slate-200" />
+                    </div>
+                    <div className='flex justify-center items-center text-center'>
+                        <h1>Introduced By Tarun Bhatia</h1>
+                    </div>
+                    <div className='flex justify-center items-center text-center'>
+                        <h1>बनिये इंट्रा के एक्सपर्ट ... मेरे साथ</h1>
+                    </div>
                 </div>
 
 
