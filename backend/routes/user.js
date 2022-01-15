@@ -21,8 +21,16 @@ const transport = nodemailer.createTransport({
 });
 
 router.post("/auth/signup", async (req, res) => {
-  const { firstName, lastName, address, email, phone, password, cpassword } =
-    req.body;
+  const {
+    firstName,
+    lastName,
+    address,
+    email,
+    phone,
+    password,
+    cpassword,
+    gender,
+  } = req.body;
   if (
     !firstName &&
     !lastName &&
@@ -30,7 +38,8 @@ router.post("/auth/signup", async (req, res) => {
     !email &&
     !phone &&
     !password &&
-    !cpassword
+    !cpassword &&
+    !gender
   ) {
     res.status(400).json({ success: false, error: "no content" });
   } else {
@@ -53,6 +62,7 @@ router.post("/auth/signup", async (req, res) => {
             email,
             phone,
             password: secPass,
+            gender,
           });
 
           const data_signup = {
@@ -77,21 +87,34 @@ router.post("/auth/login", async (req, res) => {
     res.status(400).json({ success: false, error: "no content" });
   } else {
     try {
-      let user = await User.findOne({ email });
-      if (!user) {
-        res.status(401).json({ success: false, error: "invalid email" });
+      if (email === "admin1234") {
+        if(password === 'admin1234'){
+          const admin = {
+            admin: {
+              email,
+              password
+            }
+          }
+          const admin_auth = jwt.sign(admin, process.env.JWT_SECRET);
+          res.status(200).json({adminSuccess: true, admin_auth})
+        }
       } else {
-        let pass = await bcrypt.compare(password, user.password);
-        if (!pass) {
-          res.status(401).json({ success: false, error: "invalid password" });
+        let user = await User.findOne({ email });
+        if (!user) {
+          res.status(401).json({ success: false, error: "invalid email" });
         } else {
-          let data_login = {
-            user: {
-              id: user._id,
-            },
-          };
-          const authtoken_login = jwt.sign(data_login, JWT_SECRET);
-          res.status(202).json({ success: true, authtoken_login });
+          let pass = await bcrypt.compare(password, user.password);
+          if (!pass) {
+            res.status(401).json({ success: false, error: "invalid password" });
+          } else {
+            let data_login = {
+              user: {
+                id: user._id,
+              },
+            };
+            const authtoken_login = jwt.sign(data_login, JWT_SECRET);
+            res.status(202).json({ success: true, authtoken_login });
+          }
         }
       }
     } catch (error) {
@@ -157,13 +180,12 @@ router.post("/forgot-password", async (req, res) => {
         html: output,
       };
       transport.sendMail(mailOption, function (error, info) {
-        if(error){
+        if (error) {
           console.log(error);
+        } else {
+          console.log("Email Sent: " + info);
         }
-        else{
-          console.log("Email Sent: " + info)
-        }
-      })
+      });
       res.status(200).json({ success: true, link });
     } else {
       res.status(500).json({ success: false, error: "user not found" });

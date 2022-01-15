@@ -6,7 +6,7 @@ const fetchuser = require("../middleware/fetchuser");
 
 router.get("/", async (req, res) => {
   try {
-    let review = await Review.find();
+    let review = await Review.find().sort({date: -1});
     res.status(200).json({success: true, review});
   } catch (error) {
     res.status(500).json({success: false, error: "internal error"})

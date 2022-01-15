@@ -1,0 +1,125 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+.navbar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-right: 2.5rem;
+  padding-left: 2.5rem;
+  border-top-right-radius: 2.5rem;
+  border-bottom-left-radius: 2.5rem;
+  border-bottom-right-radius: 0.75rem;
+  border-top-left-radius: 0.75rem;
+  width: 90%;
+  position: fixed;
+  height: 70px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 1000;
+}
+.navbar .brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .brand .brand-heading {
+  display: none;
+}
+.navbar .brand .hamburger {
+  display: none;
+}
+.navbar .content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5rem;
+}
+.navbar .content ul {
+  display: flex;
+  flex-direction: row;
+}
+.navbar .content ul li {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+.navbar .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.navbar .buttons .button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: rgb(79, 70, 229, 1);
+  border-top-right-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+  color: white;
+  padding: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .navbar {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+    border-top-right-radius: 2.5rem;
+    border-bottom-left-radius: 2.5rem;
+    border-bottom-right-radius: 0.75rem;
+    border-top-left-radius: 0.75rem;
+    width: 90%;
+    position: fixed;
+    height: 70px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 10000;
+  }
+  .navbar .brand {
+    display: flex;
+    justify-content: space-between;
+  }
+  .navbar .brand .brand-heading {
+    display: flex;
+  }
+  .navbar .brand .hamburger {
+    display: flex;
+  }
+  .navbar .content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    margin-left: 0rem;
+    top: 12%;
+    height: 60vh;
+    width: 90%;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-40px);
+    z-index: -1000;
+    border-bottom-left-radius: 2.5rem;
+    border-bottom-right-radius: 0.75rem;
+  }
+  .navbar .content ul {
+    display: block;
+  }
+  .navbar .content ul li {
+    padding: 10px;
+    text-align: center;
+    line-height: 30px;
+  }
+  .navbar .buttons {
+    display: none;
+  }
+}

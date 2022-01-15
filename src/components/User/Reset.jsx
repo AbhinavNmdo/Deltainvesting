@@ -71,18 +71,29 @@ const Reset = (props) => {
 
     if (validate) {
         return (
-            <div className="d-flex justify-content-center align-items-center user-back" style={{height: '89vh'}}>
+            <div className="flex justify-center items-center h-[85vh] user-back" >
                 <div className="center">
                     <div className="container p-3 center-card">
-                        <h1 className="text-center mb-5">Reset Password</h1>
+                        {/* Forgot Heading */}
+                        <div className="container mx-auto mt-6 mb-6">
+                            <div className='w-fit mx-auto flex flex-col justify-center items-center'>
+                                <h1 className="text-center text-2xl lg:text-3xl">Enter Password</h1>
+                                <div style={{ width: '90%', height: '4px', borderRadius: '100px' }} className="bg-blue-500"></div>
+                            </div>
+                        </div>
+
+
+                        {/* Reset Form */}
                         <form onSubmit={handleOnSubmit} className='p-2'>
 
-                            <div className="form-outline mb-4">
-                                <input type="password" id="password" name="password" className="form-control" placeholder="Password" onChange={handleOnChange} />
+                            <div className="flex flex-col mb-4">
+                                <label htmlFor="password" className="mb-1">Password :</label>
+                                <input type="password" id="password" name="password" className="focus:outline-none focus:ring rounded-full bg-slate-200 py-2 px-2" placeholder="Password" onChange={handleOnChange} />
                             </div>
 
-                            <div className="form-outline mb-4">
-                                <input type="password" id="cpassword" name="cpassword" className="form-control" placeholder="Confirm-Password" onChange={handleOnChange} />
+                            <div className="flex flex-col mb-4">
+                                <label htmlFor="cpassword" className="mb-1">Confirm-Password :</label>
+                                <input type="password" id="cpassword" name="cpassword" className="focus:outline-none focus:ring rounded-full bg-slate-200 py-2 px-2" placeholder="Confirm-Password" onChange={handleOnChange} />
                             </div>
 
                             <div className="text-center">
@@ -99,7 +110,7 @@ const Reset = (props) => {
     }
     else {
         return (
-            <div className="d-flex justify-content-center align-items-center user-back" style={{height: '89vh'}}>
+            <div className="d-flex justify-content-center align-items-center user-back" style={{ height: '89vh' }}>
                 <div className="center">
                     <div className="container p-3 center-card">
                         <form onSubmit={handleOnSubmit}>

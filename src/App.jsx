@@ -10,8 +10,10 @@ import Camarilla from './components/Calculators/Camarilla'
 import Reversal from './components/Calculators/Reversal'
 import OptionPrice from './components/Calculators/OptionPrice'
 import NiftyRange from './components/Calculators/NiftyRange'
+import Calculators from './components/Calculators/Calculators'
 import Courses from './components/Class/Courses'
 import Class from './components/Class/Class'
+import Admin from './components/Admin/Admin';
 import LoadingBar from 'react-top-loading-bar'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,11 +39,12 @@ function App() {
       <Navbar toast={toast}  setProgress={setProgress}/>
       <ScrollToTop/>
       <Routes>
-        <Route path="/" element={<HomePage toast={toast} />} />
+        <Route path="/" element={<HomePage toast={toast} setProgress={setProgress} />} />
         <Route path="/about" element={<About />} />
         <Route path="/reviews" element={<Reviews setProgress={setProgress} />} />
         <Route path="/courses" element={<Courses toast={toast} setProgress={setProgress} />} />
         <Route path="/courses/class/:id" element={<Class toast={toast} setProgress={setProgress} />} />
+        <Route path="/calculators" element={<Calculators />}/>
         <Route path="/calculators/camarilla" element={<Camarilla />} />
         <Route path="/calculators/reversal" element={<Reversal />} />
         <Route path="/calculators/niftyrange" element={<NiftyRange />} />
@@ -50,6 +53,7 @@ function App() {
         <Route path="/signup" element={<Signup toast={toast} setProgress={setProgress} />} />
         <Route path="/forgot-password" element={<Forgot toast={toast} setProgress={setProgress} />} />
         <Route path="/reset-password/:id/:token" element={<Reset toast={toast} setProgress={setProgress} />} />
+        <Route path="/admin" element={<Admin toast={toast} setProgress={setProgress} />} />
       </Routes>
       <ToastContainer
                 style={{ zIndex: '10000', margin: '10px' }}

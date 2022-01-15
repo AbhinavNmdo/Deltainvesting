@@ -7,7 +7,7 @@ router.use(fileupload());
 
 router.get("/", async (req, res) => {
   try {
-    let classes = await Class.find();
+    let classes = await Class.find().sort({Date: -1});
     res.status(200).json({ success: true, classes });
   } catch (error) {
     res.status(500).json({ success: false, error: "internal error" });

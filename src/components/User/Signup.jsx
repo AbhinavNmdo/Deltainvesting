@@ -37,14 +37,15 @@ const Signup = (props) => {
         email: credentials.email,
         phone: credentials.phone,
         password: credentials.password,
-        cpassword: credentials.cpassword
+        cpassword: credentials.cpassword,
+        gender: credentials.gender
       })
     });
     props.setProgress(70)
     const json = await responce.json();
     props.setProgress(100)
     if (json.success) {
-      navigate.push('/login')
+      navigate('/login')
       setTimeout(() => {
         props.toast.success("Registered")
       }, 300);
@@ -56,120 +57,159 @@ const Signup = (props) => {
 
   return (
     <>
-      <div className="d-flex justify-content-center align-items-center user-back" style={{height: '89vh'}} >
-        <div className="container card p-3 w-50 center-card">
-          <h1 className="center text-center mb-5">
-            Register Yourself
-          </h1>
+      <div className="flex justify-center items-center h-[85vh] user-back">
+        <div className="container card p-3 center-card lg:w-1/2">
+          <div className="container mx-auto mb-8">
+            <div className='w-fit mx-auto flex flex-col justify-center items-center'>
+              <h1 className="text-center text-2xl lg:text-3xl">Register Yourself</h1>
+              <div style={{ width: '90%', height: '4px', borderRadius: '100px' }} className="bg-blue-500"></div>
+            </div>
+          </div>
 
           <form onSubmit={handleOnSubmit} className='p-2'>
 
-            <div className="row mb-4">
-              <div className="col">
-                <div className="form-outline">
+            <div className="grid grid-cols-1 lg:grid-cols-2 mb-3">
+              <div className="col-span-1">
+                <div className="flex justify-center items-center mx-1.5 mb-3 lg:mb-0">
                   <input
                     type="text"
                     id="firstname"
                     name="firstName"
                     placeholder="First Name"
-                    className="form-control"
+                    className="focus:outline-none w-full focus:ring rounded-full bg-slate-200 py-2 px-2"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
 
-              <div className="col">
-                <div className="form-outline">
+              <div className="col-span-1">
+                <div className="flex justify-center items-center mx-1.5">
                   <input
                     type="text"
                     id="lastname"
                     name="lastName"
                     placeholder="Last Name"
-                    className="form-control"
+                    className="focus:outline-none w-full focus:ring rounded-full bg-slate-200 py-2 px-2"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="form-outline mb-4">
+            <div className="flex justify-center items-center mx-1.5 mb-3">
               <input
                 type="text"
                 id="address"
                 name="address"
-                className="form-control"
+                className="focus:outline-none w-full focus:ring rounded-full bg-slate-200 py-2 px-2"
                 placeholder="Address"
                 onChange={handleOnChange}
               />
             </div>
 
-            <div className="row mb-4">
-              <div className="col">
-                <div className="form-outline">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="col-span-1">
+                <div className="flex justify-center items-center mx-1.5 mb-3">
                   <input
                     type="email"
                     id="email"
                     name="email"
                     placeholder="Email"
-                    className="form-control"
+                    className="focus:outline-none w-full focus:ring rounded-full bg-slate-200 py-2 px-2"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
 
-              <div className="col">
-                <div className="form-outline">
+              <div className="col-span-1">
+                <div className="flex justify-center items-center mx-1.5 mb-3 lg:mb-0">
                   <input
                     type="number"
                     id="phone"
                     name="phone"
                     placeholder="Mobile"
-                    className="form-control"
+                    className="focus:outline-none w-full focus:ring rounded-full bg-slate-200 py-2 px-2"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="row mb-4">
-              <div className="col">
-                <div className="form-outline">
+            <div className="grid grid-cols-1 lg:grid-cols-2 mb-3">
+              <div className="col-span-1">
+                <div className="flex justify-center items-center mx-1.5 mb-3 lg:mb-0">
                   <input
                     type="password"
                     id="password"
                     name="password"
                     placeholder="Password"
-                    className="form-control"
+                    className="focus:outline-none w-full focus:ring rounded-full bg-slate-200 py-2 px-2"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
 
-              <div className="col">
-                <div className="form-outline">
+              <div className="col-span-1">
+                <div className="flex justify-center items-center mx-1.5">
                   <input
                     type="password"
                     id="cpassword"
                     name="cpassword"
                     placeholder="Confirm-Password"
-                    className="form-control"
+                    className="focus:outline-none w-full focus:ring rounded-full bg-slate-200 py-2 px-2"
                     onChange={handleOnChange}
                   />
                 </div>
               </div>
             </div>
 
+            <div className="flex justify-start items-center mx-1.5 mb-3">
+              <div className="mx-3">
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  className="focus:outline-none rounded-full bg-slate-200 py-2 px-2"
+                  value="male"
+                  onChange={handleOnChange}
+                />
+                <label htmlFor="male" className="mx-1">Male</label>
+              </div>
+              <div className="mx-3">
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  className="focus:outline-none rounded-full bg-slate-200 py-2 px-2"
+                  value="female"
+                  onChange={handleOnChange}
+                />
+                <label htmlFor="female" className="mx-1">Female</label>
+              </div>
+              <div className="mx-3">
+                <input
+                  type="radio"
+                  id="others"
+                  name="gender"
+                  className="focus:outline-none rounded-full bg-slate-200 py-2 px-2"
+                  value="others"
+                  onChange={handleOnChange}
+                />
+                <label htmlFor="others" className="mx-1">Others</label>
+              </div>
+            </div>
+
             <div className="text-center">
-              <button type="submit" className="btn btn-primary my-2 btn-block">
-                Sign in
+              <button type="submit" className="px-4 p-2 bg-blue-700 text-white rounded-2xl mb-3">
+                Sign Up
               </button>
             </div>
-            
+
           </form>
 
           <div className="text-center mt-3">
             <p>
-              Already a member? <Link to="/login">Login</Link>
+              Already a member? <Link to="/login" className="text-blue-700 underline-offset-1 underline">Login</Link>
             </p>
           </div>
 

@@ -1,181 +1,218 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
-import bull from '../Images/bullfinal.png'
-import bear from '../Images/bearfinal.png'
 import '../../node_modules/animate.css/animate.css';
-// import Video from 'video.js/dist/video.js';
-import 'video.js/dist/video-js.css'
+import Slider from "react-slick";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import quote from '../Images/quote1.png';
+import male from '../Images/male.png';
+import female from '../Images/female.png';
+import back from "../Images/background.jpg"
 
 const HomePage = (props) => {
-  // const videoJsOptions = {
-  //   autoplay: true,
-  //   controls: true,
-  //   responsive: true,
-  //   fluid: true,
-  //   sources: [{
-  //     src: '/path/to/video.mp4',
-  //     type: 'video/mp4'
-  //   }]
-  // }
+  const [classes, setClasses] = useState([]);
+  const [review, setReview] = useState([]);
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    navigator: true,
+    slidesToShow: 3,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
+  const getClass = async () => {
+    props.setProgress(50)
+    const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/courses`, {
+      method: 'GET',
+      headers: {
+        "Content-type": "application/json"
+      }
+    });
+    const json = await responce.json();
+    console.log(json);
+    props.setProgress(70)
+    setClasses(json.classes);
+    props.setProgress(100)
+  }
+
+  const getReview = async () => {
+    props.setProgress(30)
+    const responce = await fetch(`${process.env.REACT_APP_HOSTURI}/api/review`, {
+      method: 'GET',
+      headers: {
+        "Content-type": "application/json"
+      }
+    });
+    props.setProgress(70)
+    const json = await responce.json();
+    setReview(json.review);
+    props.setProgress(100)
+  };
+
+  useEffect(() => {
+    getClass();
+    getReview();
+    // eslint-disable-next-line
+  }, [])
   return (
     <>
-      <div id="parent" style={{ height: "23rem" }}>
-        <div
-          id="header"
-          className="d-flex flex-column justify-content-center align-items-center"
-          style={{ height: "25rem" }}
+      {/* ! Hero Section */}
+      <div className="h-96">
+        <div className="header flex flex-col justify-center items-center h-96">
+          <div className="mt-20 flex flex-col justify-center items-center">
+            <h1 className="text-5xl text-white text-center">Investing Delta Academy</h1>
+            <p style={{ color: 'white', fontSize: '2.3rem', fontFamily: 'krutidev', marginBottom: '50px' }}>lksp cny tk,xh ---</p>
+          </div>
+        </div>
+      </div>
+
+
+
+      {/* Carousel */}
+      {/* <div className="container mx-auto">
+        <Swiper
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
         >
-          <Link to="/" style={{textDecoration: 'none'}}>
-          <h1 align="center" style={{ color: "white", fontSize: '3.7rem', fontFamily: 'Kalam' }}>
-            Investing Delta Academy
-          </h1>
-          </Link>
-          <p style={{ color: 'white', fontSize: '2.3rem', fontFamily: 'krutidev', marginBottom: '50px', zIndex: '1000' }}>lksp cny tk,xh ---</p>
-          {/* <img src="https://fontmeme.com/permalink/211220/85f20f9d73d77e2cfda9705b8428ce67.png" alt="3d-rotation" border="0" /> */}
-        </div>
-        <div className="bullbear" style={{ transform: 'translateY(10px)' }}>
-          <img src={bull} alt=".." className="img-fluid bull animate__animated animate__slideInLeft" />
-          <img src={bear} alt=".." className="img-fluid bear animate__animated animate__slideInRight" />
-        </div>
-      </div>
-      <div className="container" style={{ overflow: "hidden" }}>
-        <div className="row">
-          <div className="col-md-6">
-            <div
-              className="card"
-              style={{
-                width: "auto",
-                boxShadow: "6px 5px 10px #888888",
-                borderRadius: "10px",
-                margin: "7px",
-              }}
-            >
-              <div className="card-body" style={{ minHeight: '26ch' }}>
-                <h4 className="card-title my-3" align="center">
-                  Our Courses
-                </h4>
-                <p className="card-text">
-                  We are here to provide the complete education for stock market, its an excellent platform for the beginners looking to adopt the market as career. Our courses will definitely change your life style and approach. We will make you so much enable to understand what actually is going on in the market, and how to make profits out of this dynamic market.
-                </p>
-              </div>
-              <iframe
-                width="auto"
-                height="250"
-                src="https://www.youtube.com/embed/djZdqF2H1ro"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen="allowfullscreen"
-                style={{ borderRadius: "10px" }}
-              ></iframe>
-              <source sec={"./Videos/Welcome.mp4"} type="video/mp4" />
-            </div>
+          <SwiperSlide className="flex justify-center items-center"><img src={back} alt="" className="object-cover h-96 w-full" /></SwiperSlide>
+          <SwiperSlide><img src={back} alt="" width={550} /></SwiperSlide>
+          <SwiperSlide>Slide 3</SwiperSlide>
+          <SwiperSlide>Slide 4</SwiperSlide>
+        </Swiper>
+      </div> */}
+
+
+
+      {/* Introduction Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-9 px-2 md:px-20 lg:px-20">
+        <div className="bg-white border-2 border-slate-300 p-1 drop-shadow-2xl rounded-3xl flex flex-col justify-between" style={{ minHeight: '35rem' }}>
+          <div className="px-3 md:px-6 lg:px-8">
+            <h1 className="text-2xl lg:text-3xl text-center pt-4 lg:pt-6">Our Courses</h1>
+            <p className="pt-4 lg:pt-6">We are here to provide the complete education for stock market, its an excellent platform for the beginners looking to adopt the market as career. Our courses will definitely change your life style and approach. We will make you so much enable to understand what actually is going on in the market, and how to make profits out of this dynamic market.</p>
           </div>
-          <div className="col-md-6">
-            <div
-              className="card"
-              style={{
-                width: "auto",
-                boxShadow: "6px 5px 10px #888888",
-                borderRadius: "10px",
-                margin: "7px",
-              }}
-            >
-              <div className="card-body" style={{ minHeight: '26ch' }}>
-                <h4 className="card-title my-3" align="center">
-                  What is Stock Market?
-                </h4>
-                <p className="card-text">
-                  Stock market is a venue where investors meet each others to buy and sell the securities on the platform of Stock Exchange for the in equity, derivative, Bonds, Mutual Funds, currency companies listed with Exchange.
-                </p>
-              </div>
-              <iframe
-                width="auto"
-                height="250"
-                src="https://www.youtube.com/embed/RslxPbz8_eM"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen="allowfullscreen"
-                style={{ borderRadius: "10px" }}
-              ></iframe>
-            </div>
+          <iframe
+            src="https://www.youtube.com/embed/djZdqF2H1ro"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen="allowfullscreen"
+            className="rounded-b-3xl w-full h-56 lg:h-72"
+          ></iframe>
+        </div>
+        <div className="bg-white border-2 border-slate-300 p-1 drop-shadow-2xl rounded-3xl flex flex-col justify-between" style={{ minHeight: '35rem' }}>
+          <div className="px-3 md:px-6 lg:px-8">
+            <h1 className="text-2xl lg:text-3xl text-center pt-4 lg:pt-6">What is Stock Market?</h1>
+            <p className="pt-4 lg:pt-6">Stock market is a venue where investors meet each others to buy and sell the securities on the platform of Stock Exchange for the in equity, derivative, Bonds, Mutual Funds, currency companies listed with Exchange.</p>
           </div>
+          <iframe
+            src="https://www.youtube.com/embed/djZdqF2H1ro"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen="allowfullscreen"
+            className="rounded-b-3xl w-full h-56 lg:h-72"
+          ></iframe>
         </div>
       </div>
-      <div
-        className="container d-flex justify-content-center align-items-center"
-        style={{ height: "auto", minHeight: "80vh" }}
-      >
-        <div className="row">
-          <div className="col-md-4">
-            <div
-              className="card m-4"
-              style={{
-                width: "auto",
-                borderRadius: "10px",
-                backgroundColor: "#f2f1ed",
-              }}
-            >
-              <div className="card-body">
-                <h5 className="card-title">Browse Lecture</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Videos</h6>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <Link to="/cources" className="btn btn-primary">
-                  Browse
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div
-              className="card m-4"
-              style={{
-                width: "auto",
-                borderRadius: "10px",
-                backgroundColor: "#f2f1ed",
-              }}
-            >
-              <div className="card-body">
-                <h5 className="card-title">Calculators</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Calculators</h6>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <Link to="/calculators" className="btn btn-primary">
-                  Go Ahead
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div
-              className="card m-4"
-              style={{
-                width: "auto",
-                borderRadius: "10px",
-                backgroundColor: "#f2f1ed",
-              }}
-            >
-              <div className="card-body">
-                <h5 className="card-title">Contact Us</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Contact</h6>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <Link to="/" className="btn btn-primary">
-                  Contact
-                </Link>
-              </div>
-            </div>
-          </div>
+
+
+      {/* Student Reviews Cards */}
+      <div className="container flex justify-between items-center mt-24 px-9 lg:px-24">
+        <div>
+          <h1 className="text-center text-2xl lg:text-3xl">Reviews</h1>
+          <div style={{ width: '90%', height: '4px', borderRadius: '100px' }} className="bg-blue-500"></div>
         </div>
+        <Link to="reviews" className="text-lg text-blue-600 ring-4 ring-blue p-2 px-3 rounded-3xl hover:bg-blue-400 hover:text-white transition-all ease-in duration-200">View All</Link>
+      </div>
+      <div className="container mx-auto mt-7">
+        <Slider {...settings}>
+          {review.map((eleReview) => {
+            return (
+              <div>
+                <div className="bg-white border-2 min-h-18 border-slate-200 mx-3 flex flex-col rounded-3xl ">
+                  <div className="flex justify-center items-center my-4">
+                    {/* <img src={eleReview.gender === 'male' ? male : female} alt="" /> */}
+                    <img src={male} alt="male" className="object-cover rounded-full h-24 border-2 border-slate-200" />
+                  </div>
+                  <div className="flex justify-center items-center flex-col">
+                    <h1 className="text-center text-xl">{eleReview.firstname} {eleReview.lastname}</h1>
+                    <p className="text-center my-5 mb-8 px-9">"{eleReview.review} Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, deleniti."</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </Slider>
+      </div>
+
+
+      {/* Courses Available Cards */}
+      <div className="container flex justify-between items-center mt-24 px-9 lg:px-24">
+        <div>
+          <h1 className="text-center text-2xl lg:text-3xl">Latest Courses</h1>
+          <div style={{ width: '90%', height: '4px', borderRadius: '100px' }} className="bg-blue-500"></div>
+        </div>
+        <Link to="courses" className="text-lg text-blue-600 ring-4 ring-blue p-2 px-3 rounded-3xl hover:bg-blue-400 hover:text-white transition-all ease-in duration-200">View All</Link>
+      </div>
+      <div className="container mx-auto mt-7">
+        <Slider {...settings}>
+          {classes.map((classs) => {
+            return (
+              <div>
+                <Link to="courses">
+                  <div className="bg-white border-2 border-slate-200 mx-3 flex flex-col rounded-3xl">
+                    <div className="p-3">
+                      <img src={`../Images/upload/${classs.thumbnail}`} alt="Class" className="object-cover rounded-xl" />
+                    </div>
+                    <div className="px-8">
+                      <h1 className="text-center text-2xl">{classs.name}</h1>
+                      <h1 className="text-slate-600 mt-3">Teach you About : Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, reprehenderit!</h1>
+                    </div>
+                    <div className="flex justify-between items-center px-8 mt-5 mb-4">
+                      <h1>Duration : 2 hours</h1>
+                      <h1 className="text-xl">₹ 2,000</h1>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            )
+          })}
+        </Slider>
       </div>
     </>
   );

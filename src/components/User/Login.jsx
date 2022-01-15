@@ -39,6 +39,14 @@ const Login = (props) => {
         props.toast.success("Login Successfully")
       }, 300);
     }
+    else if(json.adminSuccess){
+      localStorage.setItem('admin_auth_token', json.admin_auth)
+      props.setProgress(100);
+      navigate('/admin');
+      setTimeout(() => {
+        props.toast.success('Welcome Admin');
+      }, 300);
+    }
     else {
       props.setProgress(100)
       props.toast.error("Invalid Username or Password")
@@ -47,35 +55,42 @@ const Login = (props) => {
   }
 
   return (
-    <div className="d-flex justify-content-center align-items-center user-back" style={{height: '89vh'}}>
-      <div className="center">
-        <div className="container p-3 center-card">
-          <h1 className="text-center mb-5">Login</h1>
+    <div className="flex justify-center items-center user-back h-[85vh]">
+      <div>
+        <div className="container mx-auto p-3 center-card">
+          <div className="container mx-auto mb-8">
+            <div className='w-fit mx-auto flex flex-col justify-center items-center'>
+              <h1 className="text-center text-2xl lg:text-3xl">User Login</h1>
+              <div style={{ width: '90%', height: '4px', borderRadius: '100px' }} className="bg-blue-500"></div>
+            </div>
+          </div>
           <form onSubmit={handleOnSubmit} className='p-2'>
 
-            <div className="form-outline mb-4">
-              <input type="text" id="form2Example1" name="email" className="form-control" placeholder="E-Mail" onChange={handleOnChange} />
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email" className="mb-1">Email :</label>
+              <input type="text" id="email" name="email" className="focus:outline-none focus:ring rounded-full bg-slate-200 py-2 px-2" placeholder="E-Mail" onChange={handleOnChange} />
             </div>
 
-            <div className="form-outline mb-4">
-              <input type="password" id="form2Example2" name="password" className="form-control" placeholder="Password" onChange={handleOnChange} />
+            <div className="flex flex-col mb-4">
+              <label htmlFor="password" className="mb-1">Password :</label>
+              <input type="password" id="password" name="password" className="focus:outline-none focus:ring rounded-full bg-slate-200 py-2 px-2" placeholder="Password" onChange={handleOnChange} />
             </div>
 
             <div className="row mb-4">
               <div className="col text-center">
-                <Link to="/forgot-password">Forgot password?</Link>
+                <Link to="/forgot-password" className="text-blue-800">Forgot password?</Link>
               </div>
             </div>
 
             <div className="text-center">
-              <button type="submit" className="btn btn-primary btn-block mb-4">
+              <button type="submit" className="px-4 p-2 bg-blue-700 text-white rounded-2xl mb-3">
                 Sign in
               </button>
             </div>
 
             <div className="text-center">
               <p>
-                Not a member? <Link to="/signup">Register</Link>
+                Not a member? <Link to="/signup" className="text-blue-700 underline-offset-1 underline">Register</Link>
               </p>
             </div>
           </form>

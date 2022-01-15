@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const BlackSchole = () => {
     const gaussian = require('gaussian')
     const [value, setValue] = useState(0);
-    const [solu, setSolu] = useState({call: 0, put: 0, dcall: 0, dput: 0, gamma: 0, theta_call: 0, theta_put: 0, vega: 0, rho_call: 0, rho_put: 0})
+    const [solu, setSolu] = useState({ call: 0, put: 0, dcall: 0, dput: 0, gamma: 0, theta_call: 0, theta_put: 0, vega: 0, rho_call: 0, rho_put: 0 })
 
     const handleChange = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -70,23 +70,23 @@ const BlackSchole = () => {
         /*                         // * Theta Call Put values                         */
         /* -------------------------------------------------------------------------- */
 
-        const theta_call = (-(csp * Math.exp( -1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * volat * e_qt / (2 * Math.sqrt(days / 100) )) - (intr * Xe_rt * back_loan) + (dividend_yeild * csp * delta_call * e_qt)) / days;
+        const theta_call = (-(csp * Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * volat * e_qt / (2 * Math.sqrt(days / 100))) - (intr * Xe_rt * back_loan) + (dividend_yeild * csp * delta_call * e_qt)) / days;
 
 
         /* -------------------------------------------------------------------------- */
         /*                          // * Vega Call Put values                         */
         /* -------------------------------------------------------------------------- */
 
-        const vega_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * e_qt * parseFloat(r1) * Math.sqrt(days)/100
+        const vega_calc = Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * e_qt * parseFloat(r1) * Math.sqrt(days) / 100
 
 
         /* -------------------------------------------------------------------------- */
         /*                          // * Rho Call Put Values                          */
         /* -------------------------------------------------------------------------- */
 
-        const rho_call = parseFloat(sp) * days * Math.exp(-1*(intr)*parseFloat(days)) * delta_call / 100
+        const rho_call = parseFloat(sp) * days * Math.exp(-1 * (intr) * parseFloat(days)) * delta_call / 100
 
-        const rho_put = parseFloat(sp) * days * Math.exp(-1*(intr)*parseFloat(days)) * distribution1.cdf(-(d1)) / 100
+        const rho_put = parseFloat(sp) * days * Math.exp(-1 * (intr) * parseFloat(days)) * distribution1.cdf(-(d1)) / 100
 
 
         /* -------------------------------------------------------------------------- */
@@ -108,123 +108,118 @@ const BlackSchole = () => {
         /*                // * Setting the value into usestate hoooook                */
         /* -------------------------------------------------------------------------- */
 
-        setSolu(solu=>({...solu, dcall: delta_callr}))
-        setSolu(solu=>({...solu, dput: delta_putr}))
-        setSolu(solu=>({...solu, call: callr}))
-        setSolu(solu=>({...solu, put: putr}))
-        setSolu(solu=>({...solu, gamma}))
-        setSolu(solu=>({...solu, theta_call}))
+        setSolu(solu => ({ ...solu, dcall: delta_callr }))
+        setSolu(solu => ({ ...solu, dput: delta_putr }))
+        setSolu(solu => ({ ...solu, call: callr }))
+        setSolu(solu => ({ ...solu, put: putr }))
+        setSolu(solu => ({ ...solu, gamma }))
+        setSolu(solu => ({ ...solu, theta_call }))
         // setSolu(solu=>({...solu, theta_put}))
-        setSolu(solu=>({...solu, vega: vegar}))
-        setSolu(solu=>({...solu, rho_call: rho_callr}))
-        setSolu(solu=>({...solu, rho_put: rho_putr}))
+        setSolu(solu => ({ ...solu, vega: vegar }))
+        setSolu(solu => ({ ...solu, rho_call: rho_callr }))
+        setSolu(solu => ({ ...solu, rho_put: rho_putr }))
     }
     return (
         <>
             {/* Option Price Calculator */}
-            <div className="container my-4">
-                <div className="card p-4">
-                    <h1 align="center" className="form-text fs-1">Option Price Calculator</h1>
-                    <div className="row my-4">
-                        <div className="col-md-6">
-                            <div className="card p-3">
-                                <form autocomplete="off">
-                                    <div className="row g-3 align-items-center">
-                                        <div className="col">
-                                            <label htmlFor="P" className="col-form-label mt-4">Current Stock Price: </label>
-                                        </div>
-                                        <div className="col">
-                                            <input className="form-control mt-4" type="text" id="P" name="P" onChange={handleChange} />
-                                        </div>
-                                    </div>
+            <div className="container mx-auto lg:px-20 mb-16 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="flex justify-center items-center col-span-1 border-2 border-indigo-200 rounded-4xl">
+                    <form className='grid grid-cols-1 lg:grid-cols-4 p-4' autocomplete="off">
+                        <div className="col-span-3 flex flex-col justify-center items-center">
+                            <div className="items-center mt-3 col-span-3">
+                                <label htmlFor="P" className="text-slate-700">
+                                    Current Stock Price:
+                                </label>
+                                <div className="col">
+                                    <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" type="text" id="P" name="P" onChange={handleChange} />
+                                </div>
+                            </div>
 
-                                    <div className="row g-3 align-items-center">
-                                        <div className="col">
-                                            <label htmlFor="EX" className="col-form-label mt-4">Strike Price: </label>
-                                        </div>
-                                        <div className="col">
-                                            <input className="form-control mt-4" type="text" name="EX" onChange={handleChange} />
-                                        </div>
-                                    </div>
+                            <div className="items-center mt-3">
+                                <label htmlFor="EX" className="text-slate-700">
+                                    Strike Price:
+                                </label>
+                                <div className="col">
+                                    <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" type="text" id='EX' name="EX" onChange={handleChange} />
+                                </div>
+                            </div>
 
-                                    <div className="row g-3 align-items-center">
-                                        <div className="col">
-                                            <label htmlFor="t" className="col-form-label mt-4">Days Remaining: </label>
-                                        </div>
-                                        <div className="col">
-                                            <input className="form-control mt-4" type="text" id="t" name="t" onChange={handleChange} />
-                                        </div>
-                                    </div>
+                            <div className="items-center mt-3">
+                                <label htmlFor="t" className="text-slate-700">
+                                    Days Remaining:
+                                </label>
+                                <div className="col">
+                                    <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" type="text" id="t" name="t" onChange={handleChange} />
+                                </div>
+                            </div>
 
-                                    <div className="row g-3 align-items-center">
-                                        <div className="col">
-                                            <label htmlFor="rf" className="col-form-label mt-4">Interest Rate: </label>
-                                        </div>
-                                        <div className="col">
-                                            <input className="form-control mt-4" type="text" id="rf" name="rf" onChange={handleChange} />
-                                        </div>
-                                    </div>
+                            <div className="items-center mt-3">
+                                <label htmlFor="rf" className="text-slate-700">
+                                    Interest Rate:
+                                </label>
+                                <div className="col">
+                                    <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" type="text" id="rf" name="rf" onChange={handleChange} />
+                                </div>
+                            </div>
 
-                                    <div className="row g-3 align-items-center">
-                                        <div className="col">
-                                            <label htmlFor="a" className="col-form-label mt-4">Volatility: </label>
-                                        </div>
-                                        <div className="col">
-                                            <input className="form-control mt-4" type="text" id="a" name="a" onChange={handleChange} />
-                                        </div>
-                                    </div>
-
-                                    <button className="btn btn-primary mt-5" onClick={BScal}>Submit</button>
-                                </form>
+                            <div className="items-center mt-3">
+                                <label htmlFor="a" className="text-slate-700">
+                                    Volatility:
+                                </label>
+                                <div className="col">
+                                    <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" type="text" id="a" name="a" onChange={handleChange} />
+                                </div>
                             </div>
                         </div>
-
-                        <div className="col-md-6">
-                            <div className="card p-3 w-100 h-100 d-flex justify-content-center align-items-center">
-                                <table className="table table-dark w-100">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Call</th>
-                                            <th scope="col">Put</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Price</th>
-                                            <td>{solu.call}</td>
-                                            <td>{solu.put}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Delta</th>
-                                            <td>{solu.dcall}</td>
-                                            <td>{solu.dput}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Gamma</th>
-                                            <td>{solu.gamma}</td>
-                                            <td>{solu.gamma}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Theta</th>
-                                            <td>{solu.theta_call}</td>
-                                            <td>{solu.theta_put}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Vega</th>
-                                            <td>{solu.vega}</td>
-                                            <td>{solu.vega}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Rho</th>
-                                            <td>{solu.rho_call}</td>
-                                            <td>{solu.rho_put}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <div className='col-span-1 my-8 lg:my-0 flex justify-center items-center'>
+                            <button className="p-1 bg-blue-400 mx-4 rounded-4xl text-xl px-10 ring-offset-2 transition-all duration-75 active:bg-blue-500 active:ring active:ring-blue-400 active:text-white" onClick={BScal} type="submit">
+                                Show Result
+                            </button>
                         </div>
-                    </div>
+                    </form>
+                </div>
+                <div className="flex justify-center items-center flex-col col-span-1 border-2 border-indigo-200 rounded-4xl">
+                    <table className="border-separate my-6 lg:my-0">
+                        <thead>
+                            <tr>
+                                <th scope="col" className='bg-indigo-300 rounded-xl p-3 px-7 rounded-tl-2xl rounded-bl-2xl'>#</th>
+                                <th scope="col" className='bg-indigo-300 rounded-xl p-3 px-7'>CALL</th>
+                                <th scope="col" className='bg-indigo-300 rounded-xl p-3 px-7 rounded-tr-2xl rounded-br-2xl mb'>PUT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" className='p-2 bg-indigo-300 px-4 rounded-tl-2xl'>Price</th>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.call}</td>
+                                <td className='bg-indigo-200 p-2 px-4 text-center rounded-tr-2xl'>{solu.put}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" className='p-2 bg-indigo-300 px-4'>Delta</th>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.dcall}</td>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.dput}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" className='p-2 bg-indigo-300 px-4'>Gamma</th>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.gamma}</td>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.gamma}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" className='p-2 bg-indigo-300 px-4'>Theta</th>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.theta_call}</td>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.theta_put}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" className='p-2 bg-indigo-300 px-4'>Vega</th>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.vega}</td>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.vega}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" className='p-2 bg-indigo-300 px-4 rounded-bl-2xl'>Rho</th>
+                                <td className='bg-indigo-200 p-2 px-4 text-center'>{solu.rho_call}</td>
+                                <td className='bg-indigo-200 p-2 px-4 text-center rounded-br-2xl'>{solu.rho_put}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </>

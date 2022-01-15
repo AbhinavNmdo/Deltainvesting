@@ -27,58 +27,68 @@ const Cources = (props) => {
   }
 
   useEffect(() => {
-    getClass()
+    getClass();
+    // eslint-disable-next-line
   }, [])
 
   return (
-    <div className="container my-4">
-      <h1 style={{ textAlign: 'center', margin: '65px' }}>Courses Available</h1>
-      <div className="row" style={{minHeight: '100vh'}}>
+    <>
+      {/* Courses Heading */}
+      <div className="container mx-auto mt-6">
+        <div className='w-fit mx-auto flex flex-col justify-center items-center'>
+          <h1 className="text-center text-2xl lg:text-3xl">Courses</h1>
+          <div style={{ width: '90%', height: '4px', borderRadius: '100px' }} className="bg-blue-500"></div>
+        </div>
+      </div>
+
+
+      {/* Courses Content */}
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-10">
         {classes.map((classs) => {
-          return (
-            <div className="col-md-6" key={classs.name}>
-              <div className="card mb-3" style={{ maxWidth: '540px', borderRadius: '13px', boxShadow: '1px 1px 10px 1px' }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src={`../Images/upload/${classs.thumbnail}`} className="img-fluid" alt="..." style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '13px' }} />
+          if (classs.category === 'primium') {
+            return (
+              <Link to='#' onClick={toasting}>
+                <div className="bg-white border-2 border-slate-200 mx-3 flex flex-col rounded-3xl">
+                  <div className="p-3">
+                    <img src={`../Images/upload/${classs.thumbnail}`} alt="Class" className="object-cover rounded-xl" />
                   </div>
-                  <div className="col-md-8">
-                    <div className="card-body"> 
-                      <h5 className="card-title">{classs.name}</h5>
-                      <p className="card-text">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem iusto autem quod unde consectetur vel neque fuga eligendi itaque sed.
-                      </p>
-                      <p className="card-text">
-                        {classs.category === 'primium' ? <span className="badge bg-warning text-dark">Primium</span> : <small className="text-muted">Normal</small>}
-                      </p>
-                      {(() => {
-                        if (classs.category === 'primium') {
-                          if (localStorage.getItem('auth-token')) {
-                            return (
-                              <Link to={`/courses/class/${classs._id}`} className="stretched-link"></Link>
-                            )
-                          }
-                          else {
-                            return (
-                              <Link to="#" className="stretched-link" onClick={toasting}></Link>
-                            )
-                          }
-                        }
-                        else {
-                          return (
-                            <Link to={`/courses/class/${classs._id}`} className="stretched-link"></Link>
-                          )
-                        }
-                      })()}
-                    </div>
+                  <div className="px-8 flex flex-col justify-center items-center">
+                    <h1 className="text-center text-2xl">{classs.name}</h1>
+                    <span className="text-sm text-yellow-500 text-center">Primium</span>
+                    <h1 className="text-slate-600 mt-3">Teach you About : Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, reprehenderit!</h1>
+                  </div>
+                  <div className="flex justify-between items-center px-8 mt-5 mb-4">
+                    <h1>Duration : 2 hours</h1>
+                    <h1 className="text-xl">₹ 2,000</h1>
                   </div>
                 </div>
-              </div>
-            </div>
-          )
+              </Link>
+            );
+          }
+          else {
+            return (
+              // Courses Cards
+              <Link to={`/courses/class/${classs._id}`}>
+                <div className="bg-white border-2 border-slate-200 mx-3 flex flex-col rounded-3xl">
+                  <div className="p-3">
+                    <img src={`../Images/upload/${classs.thumbnail}`} alt="Class" className="object-cover rounded-xl" />
+                  </div>
+                  <div className="px-8 flex flex-col justify-center items-center">
+                    <h1 className="text-center text-2xl">{classs.name}</h1>
+                    <span className="text-sm text-green-500 text-center">Free</span>
+                    <h1 className="text-slate-600 mt-3">Teach you About : Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, reprehenderit!</h1>
+                  </div>
+                  <div className="flex justify-between items-center px-8 mt-5 mb-4">
+                    <h1>Duration : 2 hours</h1>
+                    <h1 className="text-xl">₹ 2,000</h1>
+                  </div>
+                </div>
+              </Link>
+            );
+          }
         })}
       </div>
-    </div>
+    </>
   );
 };
 
