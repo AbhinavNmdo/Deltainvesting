@@ -2,6 +2,11 @@
   "name": "deltainvesting",
   "version": "1.0.0",
   "description": "Online class app",
+  "engines": {
+    "node": "16.x",
+    "yarn": "1.x",
+    "npm": "8.x"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
