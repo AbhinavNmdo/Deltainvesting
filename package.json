@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "cd ./backend && yarn install && node index.js",
-    "heroku-postbuild": "YARN_PRODUCTION=false yarn install && yarn build"
+    "heroku-postbuild": "YARN_PRODUCTION=false yarn install && yarn run build"
   },
   "eslintConfig": {
     "extends": [
