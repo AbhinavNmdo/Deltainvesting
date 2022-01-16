@@ -1,6 +1,32 @@
 {
-  "name": "backend",
+  "name": "deltainvesting",
   "version": "1.0.0",
+  "description": "Online class app",
   "main": "index.js",
-  "license": "MIT"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbhinavNmdo/deltainvesting.git"
+  },
+  "author": "AbhinavNmdo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbhinavNmdo/deltainvesting/issues"
+  },
+  "homepage": "https://github.com/AbhinavNmdo/deltainvesting#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "express-fileupload": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.2",
+    "nodemailer": "^6.7.2"
+  }
 }
