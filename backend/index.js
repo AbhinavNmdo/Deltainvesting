@@ -15,7 +15,9 @@ app.use("/api/user", require("./routes/user"));
 app.use("/api/courses", require("./routes/class"));
 app.use("/api/review", require("./routes/review"));
 
-if (process.env.NODE_ENV == "production") {
+console.log(process.env.NODE_ENV)
+console.log(process.env.MONGO_URI)
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../build")));
 
   app.get("*", (req, res) => {
