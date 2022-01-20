@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from '../../Images/logo2.png';
+import logo from '../../Images/investingdelta.png';
 import './Navbar.css';
 
 const Navbar = (props) => {
@@ -33,7 +33,7 @@ const Navbar = (props) => {
         <div className="navbar">
           <div className="brand">
             <div className="logo">
-              <img src={logo} alt="investingdelta" width={80} />
+              <img src={logo} alt="investingdelta" width={70} />
             </div>
             <div className="brand-heading">
               <h1>Investing Delta</h1>

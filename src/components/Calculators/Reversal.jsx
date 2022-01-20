@@ -27,9 +27,9 @@ const Reversal = () => {
         greenb.classList.remove(...greenRemove)
 
         redc.classList.remove('hidden');
-        redc.classList.add('animate__slideInRight');
+        redc.classList.add('animate__bounceInUp');
         greenc.classList.add('hidden');
-        greenc.classList.remove('animate__slideInRight');
+        greenc.classList.remove('animate__bounceInUp');
     }
     const handleOnClick2 = (e) => {
         const greenc = document.querySelector('#green_cal')
@@ -46,9 +46,9 @@ const Reversal = () => {
         redb.classList.remove(...redRemove);
 
         greenc.classList.remove('hidden');
-        greenc.classList.add('animate__slideInRight');
+        greenc.classList.add('animate__bounceInUp');
         redc.classList.add('hidden');
-        redc.classList.remove('animate__slideInRight');
+        redc.classList.remove('animate__bounceInUp');
     }
 
     const handleChange = (e) => {
