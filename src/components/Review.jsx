@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import male from '../Images/male.png';
-import female from '../Images/female.png';
+// import female from '../Images/female.png';
 
 const Review = (props) => {
     const [review, setReview] = useState([]);

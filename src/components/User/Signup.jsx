@@ -57,7 +57,7 @@ const Signup = (props) => {
 
   return (
     <>
-      <div className="flex justify-center items-center h-[85vh] user-back">
+      <div className="flex justify-center items-center h-[85vh] user-back p-2">
         <div className="container card p-3 center-card lg:w-1/2">
           <div className="container mx-auto mb-8">
             <div className='w-fit mx-auto flex flex-col justify-center items-center'>

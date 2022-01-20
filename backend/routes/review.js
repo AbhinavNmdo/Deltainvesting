@@ -20,6 +20,7 @@ router.post("/", fetchuser, async (req, res) => {
       firstname: user.firstName,
       lastname: user.lastName,
       review: req.body.review,
+      gender: user.gender,
     });
     reviews.save();
     res.status(201).json({success: true, reviews});

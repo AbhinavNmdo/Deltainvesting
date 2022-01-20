@@ -2,16 +2,21 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import '../../node_modules/animate.css/animate.css';
-import Slider from "react-slick";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import quote from '../Images/quote1.png';
 import male from '../Images/male.png';
-import female from '../Images/female.png';
-import back from "../Images/background.jpg"
+import SwiperCore, {
+  Pagination,
+  Scrollbar
+} from 'swiper';
+// import quote from '../Images/quote1.png';
+// import female from '../Images/female.png';
+// import back from "../Images/background.jpg"
+
+SwiperCore.use([Pagination, Scrollbar])
 
 const HomePage = (props) => {
   const [classes, setClasses] = useState([]);
@@ -47,7 +52,8 @@ const HomePage = (props) => {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+          initialSlide: 1,
         }
       }
     ]
@@ -62,7 +68,6 @@ const HomePage = (props) => {
       }
     });
     const json = await responce.json();
-    console.log(json);
     props.setProgress(70)
     setClasses(json.classes);
     props.setProgress(100)
@@ -152,32 +157,48 @@ const HomePage = (props) => {
 
 
       {/* Student Reviews Cards */}
-      <div className="container flex justify-between items-center mt-24 px-9 lg:px-24">
+      <div className="container flex justify-between items-center mr-0 mt-24 px-9 lg:px-24">
         <div>
           <h1 className="text-center text-2xl lg:text-3xl">Reviews</h1>
           <div style={{ width: '90%', height: '4px', borderRadius: '100px' }} className="bg-blue-500"></div>
         </div>
         <Link to="reviews" className="text-lg text-blue-600 ring-4 ring-blue p-2 px-3 rounded-3xl hover:bg-blue-400 hover:text-white transition-all ease-in duration-200">View All</Link>
       </div>
-      <div className="container mx-auto mt-7">
-        <Slider {...settings}>
+      <div className="container mx-auto px-2 mt-7">
+        <Swiper slidesPerView={1} spaceBetween={10} pagination={{
+          "clickable": true
+        }} breakpoints={{
+          "640": {
+            "slidesPerView": 1,
+            "spaceBetween": 15
+          },
+          "768": {
+            "slidesPerView": 2,
+            "spaceBetween": 0
+          },
+          "1024": {
+            "slidesPerView": 3,
+            "spaceBetween": 0
+          }
+        }} className="mySwiper">
           {review.map((eleReview) => {
             return (
-              <div>
-                <div className="bg-white border-2 min-h-18 border-slate-200 mx-3 flex flex-col rounded-3xl ">
-                  <div className="flex justify-center items-center my-4">
-                    {/* <img src={eleReview.gender === 'male' ? male : female} alt="" /> */}
-                    <img src={male} alt="male" className="object-cover rounded-full h-24 border-2 border-slate-200" />
-                  </div>
-                  <div className="flex justify-center items-center flex-col">
-                    <h1 className="text-center text-xl">{eleReview.firstname} {eleReview.lastname}</h1>
-                    <p className="text-center my-5 mb-8 px-9">"{eleReview.review} Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, deleniti."</p>
+              <SwiperSlide>
+                <div>
+                  <div className="bg-white border-2 min-h-18 border-slate-200 mx-3 flex flex-col rounded-3xl ">
+                    <div className="flex justify-center items-center my-4">
+                      <img src={male} alt="male" className="object-cover rounded-full h-24 border-2 border-slate-200" />
+                    </div>
+                    <div className="flex justify-center items-center flex-col">
+                      <h1 className="text-center text-xl">{eleReview.firstname} {eleReview.lastname}</h1>
+                      <p className="text-center my-5 mb-8 px-9">"{eleReview.review} Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, deleniti."</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </SwiperSlide>
             )
           })}
-        </Slider>
+        </Swiper>
       </div>
 
 
@@ -189,30 +210,47 @@ const HomePage = (props) => {
         </div>
         <Link to="courses" className="text-lg text-blue-600 ring-4 ring-blue p-2 px-3 rounded-3xl hover:bg-blue-400 hover:text-white transition-all ease-in duration-200">View All</Link>
       </div>
-      <div className="container mx-auto mt-7">
-        <Slider {...settings}>
+      <div className="container px-2 mx-auto mt-7">
+        <Swiper slidesPerView={1} spaceBetween={0} pagination={{
+          "clickable": true
+        }} breakpoints={{
+          "640": {
+            "slidesPerView": 1,
+            "spaceBetween": 20
+          },
+          "768": {
+            "slidesPerView": 2,
+            "spaceBetween": 40
+          },
+          "1024": {
+            "slidesPerView": 3,
+            "spaceBetween": 50
+          }
+        }} className="mySwiper">
           {classes.map((classs) => {
             return (
-              <div>
-                <Link to="courses">
-                  <div className="bg-white border-2 border-slate-200 mx-3 flex flex-col rounded-3xl">
-                    <div className="p-3">
-                      <img src={`../Images/upload/${classs.thumbnail}`} alt="Class" className="object-cover rounded-xl" />
+              <SwiperSlide>
+                <div>
+                  <Link to="courses">
+                    <div className="bg-white border-2 border-slate-200 mx-3 flex flex-col rounded-3xl">
+                      <div className="p-3">
+                        <img src={`../Images/upload/${classs.thumbnail}`} alt="Class" className="object-cover rounded-xl" />
+                      </div>
+                      <div className="px-8">
+                        <h1 className="text-center text-2xl">{classs.name}</h1>
+                        <h1 className="text-slate-600 mt-3">Teach you About : Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, reprehenderit!</h1>
+                      </div>
+                      <div className="flex justify-between items-center px-8 mt-5 mb-4">
+                        <h1>Duration : 2 hours</h1>
+                        <h1 className="text-xl">₹ 2,000</h1>
+                      </div>
                     </div>
-                    <div className="px-8">
-                      <h1 className="text-center text-2xl">{classs.name}</h1>
-                      <h1 className="text-slate-600 mt-3">Teach you About : Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, reprehenderit!</h1>
-                    </div>
-                    <div className="flex justify-between items-center px-8 mt-5 mb-4">
-                      <h1>Duration : 2 hours</h1>
-                      <h1 className="text-xl">₹ 2,000</h1>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+                  </Link>
+                </div>
+              </SwiperSlide>
             )
           })}
-        </Slider>
+        </Swiper>
       </div>
     </>
   );

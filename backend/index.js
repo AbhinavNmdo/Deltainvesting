@@ -15,8 +15,6 @@ app.use("/api/user", require("./routes/user"));
 app.use("/api/courses", require("./routes/class"));
 app.use("/api/review", require("./routes/review"));
 
-console.log(process.env.NODE_ENV)
-console.log(process.env.MONGO_URI)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../build")));
 
@@ -25,5 +23,5 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 app.listen(port, () => {
-  console.log(`Listning at http://localhost:${port}`);
+  console.log("\x1b[34m", `Listning at ${process.env.HOSTURI}:${port}`);
 });

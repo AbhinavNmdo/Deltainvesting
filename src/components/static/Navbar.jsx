@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from '../../Images/logo2.png';
 import './Navbar.css';
@@ -6,44 +6,11 @@ import './Navbar.css';
 const Navbar = (props) => {
   const navigate = useNavigate();
   let location = useLocation();
-  const [nav, setNav] = useState("");
-  const [burger, setBurger] = useState("");
-  const [expand, setExpand] = useState(false);
-  const ref = useRef(null);
-
-  const handleOnScroll = () => {
-    if (location.pathname === "/") {
-      if (window.scrollY >= 450) {
-        setNav("bg-dark fixed-top");
-      } else {
-        setNav("");
-      }
-    } else {
-      setNav("fixed-top");
-    }
-  };
-
-  const handleOnClick = () => {
-    setExpand(true);
-    if (burger === "bg-dark") {
-      setBurger("");
-    } else {
-      setBurger("bg-dark");
-    }
-  };
-  window.addEventListener("scroll", handleOnScroll);
-
-  const toggle = () => {
-    if (expand) {
-      ref.current.click();
-      setExpand(false);
-    }
-  }
 
   const handleLogout = (e) => {
     props.setProgress(30)
     e.preventDefault();
-    toggle();
+    toggleNav();
     localStorage.clear();
     props.setProgress(70)
     navigate('/login');
@@ -92,8 +59,8 @@ const Navbar = (props) => {
               if (!localStorage.getItem('auth-token')) {
                 return (
                   <div className="flex justify-center items-center flex-row mt-7 lg:mt-0">
-                    <Link className={`px-4 py-2 text-white rounded-2xl bg-indigo-600 mx-1 ring-indigo-500 ring-offset-1 ${location.pathname === '/login' ? 'ring' : ''}`} to="/login">Login</Link>
-                    <Link className={`px-4 py-2 text-white rounded-2xl bg-indigo-600 mx-1 ring-indigo-500 ring-offset-1 ${location.pathname === '/signup' ? 'ring' : ''}`} to="/signup">Signup</Link>
+                    <Link onClick={toggleNav} className={`px-4 py-2 text-white rounded-2xl bg-indigo-600 mx-1 ring-indigo-500 ring-offset-1 ${location.pathname === '/login' ? 'ring' : ''}`} to="/login">Login</Link>
+                    <Link onClick={toggleNav} className={`px-4 py-2 text-white rounded-2xl bg-indigo-600 mx-1 ring-indigo-500 ring-offset-1 ${location.pathname === '/signup' ? 'ring' : ''}`} to="/signup">Signup</Link>
                   </div>
                 )
               }

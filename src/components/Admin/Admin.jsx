@@ -7,6 +7,7 @@ const Admin = () => {
         if(!localStorage.getItem('admin_auth_token')){
             navigate('/');
         }
+        // eslint-disable-next-line
     }, [])
     return (
         <>
