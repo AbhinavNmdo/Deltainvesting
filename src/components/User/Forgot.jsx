@@ -26,10 +26,11 @@ const Forgot = (props) => {
         props.setProgress(70)
         const json = await res.json();
         props.setProgress(100)
+        console.log(json);
         if (json.success) {
             props.toast.success("Email Sent")
         }
-        else if (!json.seccess) {
+        else if (!json.success) {
             props.toast.error("Something went Wrong")
         }
     }
