@@ -58,7 +58,7 @@ const NiftyRange = () => {
 
                             <div className="items-center mt-3">
                                 <label htmlFor="gr" className="text-slate-700">
-                                    Strike Price:
+                                    Volatility:
                                 </label>
                                 <div className="col">
                                     <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" type="text" id="nmp" name="nmp" onChange={handleChange} />

@@ -70,7 +70,11 @@ const BlackSchole = () => {
         /*                         // * Theta Call Put values                         */
         /* -------------------------------------------------------------------------- */
 
-        const theta_call = (-(csp * Math.exp(-1 * Math.pow(d1, 2) / 2) / Math.sqrt(2 * Math.PI) * volat * e_qt / (2 * Math.sqrt(days / 100))) - (intr * Xe_rt * back_loan) + (dividend_yeild * csp * delta_call * e_qt)) / days;
+        var distribution3 = gaussian(0, 1);
+
+        const theta_call = ((((-1*((((csp*((1/Math.sqrt((2*Math.PI)))*Math.exp(((-1*Math.pow(d1,2))/2))))*volat)*Math.exp(((-1*days)*dividend_yeild)))/(2*Math.sqrt(days))))+((dividend_yeild*csp)*delta_call))-(((intr*sp)*Math.exp(((-1*intr)*days)))*distribution3.cdf(d2))))/365;
+
+        const theta_put = (((((-1*((((csp*((1/Math.sqrt((2*Math.PI)))*Math.exp(((-1*Math.pow(d1,2))/2))))*volat)*Math.exp(((-1*days)*dividend_yeild)))))/(2*Math.sqrt(days)))-(((dividend_yeild*csp)*distribution3.cdf((-1*d1)))*Math.exp(((-1*days)*dividend_yeild))))+(((intr*sp)*Math.exp(((-1*intr)*days)))*distribution3.cdf((-1*d1)))))/365;
 
 
         /* -------------------------------------------------------------------------- */
@@ -86,7 +90,7 @@ const BlackSchole = () => {
 
         const rho_call = parseFloat(sp) * days * Math.exp(-1 * (intr) * parseFloat(days)) * delta_call / 100
 
-        const rho_put = parseFloat(sp) * days * Math.exp(-1 * (intr) * parseFloat(days)) * distribution1.cdf(-(d1)) / 100
+        const rho_put = (((((-1*sp)*days)*Math.exp(((-1*intr)*days)))*distribution3.cdf((-1*d2)))*Math.exp(((-1*dividend_yeild)*days)))/100
 
 
         /* -------------------------------------------------------------------------- */
@@ -101,7 +105,8 @@ const BlackSchole = () => {
         const vegar = Math.round((vega_calc + Number.EPSILON) * 100) / 100
         const rho_callr = Math.round((rho_call + Number.EPSILON) * 100) / 100
         const rho_putr = Math.round((rho_put + Number.EPSILON) * 100) / 100
-        /* -------------------- //? Rouding the theta call & put -------------------- */
+        const theta_callr = Math.round((theta_call + Number.EPSILON) * 100) / 100
+        const theta_putr = Math.round((theta_put + Number.EPSILON) * 100) / 100
 
 
         /* -------------------------------------------------------------------------- */
@@ -113,8 +118,8 @@ const BlackSchole = () => {
         setSolu(solu => ({ ...solu, call: callr }))
         setSolu(solu => ({ ...solu, put: putr }))
         setSolu(solu => ({ ...solu, gamma }))
-        setSolu(solu => ({ ...solu, theta_call }))
-        // setSolu(solu=>({...solu, theta_put}))
+        setSolu(solu => ({ ...solu, theta_call: theta_callr }))
+        setSolu(solu => ({...solu, theta_put: theta_putr}))
         setSolu(solu => ({ ...solu, vega: vegar }))
         setSolu(solu => ({ ...solu, rho_call: rho_callr }))
         setSolu(solu => ({ ...solu, rho_put: rho_putr }))

@@ -64,7 +64,7 @@ const Camarilla = () => {
                         <div className="col-span-3 flex flex-col justify-center items-center">
                             <div className="items-center mt-3 col-span-3">
                                 <label htmlFor="P" className="text-slate-700">
-                                    Current Stock Price:
+                                    Closing Price:
                                 </label>
                                 <div className="col">
                                     <input type="text" name="high" className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" onChange={handleChange} id="high" />
@@ -73,7 +73,7 @@ const Camarilla = () => {
 
                             <div className="items-center mt-3">
                                 <label htmlFor="EX" className="text-slate-700">
-                                    Strike Price:
+                                    High:
                                 </label>
                                 <div className="col">
                                     <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" type="text" name="low" id="low" onChange={handleChange} />
@@ -82,7 +82,7 @@ const Camarilla = () => {
 
                             <div className="items-center mt-3">
                                 <label htmlFor="t" className="text-slate-700">
-                                    Days Remaining:
+                                    Low:
                                 </label>
                                 <div className="col">
                                     <input className="focus:outline-none focus:ring rounded-full bg-slate-200 py-1" onChange={handleChange} type="text" name="close" id="close" />
